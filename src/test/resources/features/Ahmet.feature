@@ -1,1 +1,1 @@
-Ahmet
+Ahmet suat tanış
