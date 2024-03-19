@@ -34,4 +34,4 @@ Feature: Register Functionality
       | lee                                     | roy                                     | @leeroy     | 5551112233                                     | 1234asdf                                     | 1234asdf                                     | true    |
       | lee                                     | roy                                     | leeroy@     | 5551112233                                     | 1234asdf                                     | 1234asdf                                     | true    |
 
-
+Scenario:
