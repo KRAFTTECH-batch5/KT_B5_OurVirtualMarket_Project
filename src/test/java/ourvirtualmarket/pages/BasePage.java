@@ -1,6 +1,7 @@
 package ourvirtualmarket.pages;
 
 import com.github.javafaker.Faker;
+import io.cucumber.java.zh_cn.假如;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -19,6 +20,22 @@ public abstract class BasePage {
     private WebElement subsCheckBox;
     @FindBy(xpath = "//div[@class='signin-w font-title hidden-sm hidden-xs']//a[text()='Register']")
     private WebElement registerBtn;
+    @FindBy (xpath = "(//i[@class='fa fa-search'])[3]")
+    public WebElement alternativeSearchBtn;
+
+    @FindBy (xpath = "(//span[text()='Search'])[1]")
+    public WebElement searchText;
+    @FindBy (xpath = "(//input[@type='text'])[3]")
+    public WebElement searchArea;
+
+    @FindBy (xpath = "(//input[@name='search'])[2]")
+    public WebElement searchBoxBtn;
+
+    @FindBy (xpath = "(//a[@class='popup-close'])[4]")
+    public WebElement toCloseSearchBox;
+
+    @FindBy (xpath = "(//div[@class='row']//b)[1]")
+    public WebElement welcomeMessage;
 
     /**
      * This method closes the "popup" on the main page.
