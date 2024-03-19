@@ -27,6 +27,11 @@ public abstract class BasePage {
         subsCheckBox.click();
         subsPopupClose.click();
     }
+
+    public void closePopUpWithoutCheckbox(){
+        subsPopupClose.click();
+    }
+
     public void navigateToRegisterPage(){
         registerBtn.click();
     }
