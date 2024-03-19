@@ -4,6 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import ourvirtualmarket.pages.LoginPage;
+import ourvirtualmarket.pages.RegisterPage;
 import ourvirtualmarket.utilities.ConfigurationReader;
 import ourvirtualmarket.utilities.Driver;
 
@@ -26,7 +27,7 @@ public class LoginStepDefs {
         loginPage.clickLoginButton();
     }
     @Then("The user should see the {string} pop-up")
-    public void the_user_should_see_the_pop_up(String string) {
+    public void the_user_should_see_the_pop_up(String string) throws InterruptedException {
         loginPage.verifyPopUp(string);
     }
     @Then("The user should see the email address bar")
