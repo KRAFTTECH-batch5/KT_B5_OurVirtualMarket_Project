@@ -86,6 +86,7 @@ public class LoginPage extends BasePage {
         passwordBar.isDisplayed();
     }
 
+
     /**
      * This method verifies the social accounts.
      * @param string
@@ -124,6 +125,11 @@ public class LoginPage extends BasePage {
     public void login() {
         emailBar.sendKeys(ConfigurationReader.get("username"));
         passwordBar.sendKeys(ConfigurationReader.get("password"));
+        loginBtn.click();
+    }
+    public void login(String email,String password){
+        emailBar.sendKeys(email);
+        passwordBar.sendKeys(password);
         loginBtn.click();
     }
 
