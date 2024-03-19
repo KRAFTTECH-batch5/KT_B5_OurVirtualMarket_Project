@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
                 "html:target/default-html-reports.html"
         },
         features = "src/test/resources/features",
-        glue = "com/ourvirtualmarket/step_definitions",
+        glue = "ourvirtualmarket/step_definitions",
         dryRun = false,
         tags = ""
 )
