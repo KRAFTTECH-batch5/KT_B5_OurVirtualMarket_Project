@@ -17,10 +17,10 @@ public class LoginPage extends BasePage {
     @FindBy(id = "email")
     private WebElement emailBar;
 
-    @FindBy(id = "password")
+    @FindBy(id = "pass")
     private WebElement passwordBar;
 
-    @FindBy(xpath = "//label[@text()='Login with your social account']")
+    @FindBy(css = ".control-label")
     private WebElement socialAccountBar;
 
     @FindBy(css = ".btn-google-plus")
@@ -65,7 +65,8 @@ public class LoginPage extends BasePage {
      *
      * @param string
      */
-    public void verifyPopUp(String string) {
+    public void verifyPopUp(String string) throws InterruptedException {
+        Thread.sleep(2000);
         String actual = signInOrRegister.getText();
         String expected = string;
         Assert.assertEquals(expected, actual);
@@ -84,6 +85,7 @@ public class LoginPage extends BasePage {
     public void verifyPasswordBar() {
         passwordBar.isDisplayed();
     }
+
 
     /**
      * This method verifies the social accounts.
@@ -123,6 +125,11 @@ public class LoginPage extends BasePage {
     public void login() {
         emailBar.sendKeys(ConfigurationReader.get("username"));
         passwordBar.sendKeys(ConfigurationReader.get("password"));
+        loginBtn.click();
+    }
+    public void login(String email,String password){
+        emailBar.sendKeys(email);
+        passwordBar.sendKeys(password);
         loginBtn.click();
     }
 
