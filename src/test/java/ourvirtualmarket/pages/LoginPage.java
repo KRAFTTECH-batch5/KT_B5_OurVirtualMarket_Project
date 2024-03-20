@@ -17,10 +17,10 @@ public class LoginPage extends BasePage {
     @FindBy(id = "email")
     private WebElement emailBar;
 
-    @FindBy(id = "password")
+    @FindBy(id = "pass")
     private WebElement passwordBar;
 
-    @FindBy(xpath = "//label[@text()='Login with your social account']")
+    @FindBy(css = ".control-label")
     private WebElement socialAccountBar;
 
     @FindBy(css = ".btn-google-plus")
@@ -44,6 +44,15 @@ public class LoginPage extends BasePage {
     @FindBy(css = ".close-login")
     private WebElement exitBtn;
 
+    @FindBy(xpath = "//div[@class='alert alert-danger alert-dismissible']")
+    private WebElement errorMessage;
+
+    @FindBy(xpath = "//div[@class='well ']")
+    private WebElement newCustomerTable;
+
+    @FindBy(xpath = "//div[@class='well col-sm-12']")
+    private WebElement returningCustomerTable;
+
 
 
     /**
@@ -65,7 +74,8 @@ public class LoginPage extends BasePage {
      *
      * @param string
      */
-    public void verifyPopUp(String string) {
+    public void verifyPopUp(String string) throws InterruptedException {
+        Thread.sleep(2000);
         String actual = signInOrRegister.getText();
         String expected = string;
         Assert.assertEquals(expected, actual);
@@ -84,6 +94,7 @@ public class LoginPage extends BasePage {
     public void verifyPasswordBar() {
         passwordBar.isDisplayed();
     }
+
 
     /**
      * This method verifies the social accounts.
@@ -125,6 +136,11 @@ public class LoginPage extends BasePage {
         passwordBar.sendKeys(ConfigurationReader.get("password"));
         loginBtn.click();
     }
+    public void login(String email,String password){
+        emailBar.sendKeys(email);
+        passwordBar.sendKeys(password);
+        loginBtn.click();
+    }
 
     /**
      * This method verifies the exit button.
@@ -140,5 +156,25 @@ public class LoginPage extends BasePage {
         String actual = Driver.get().getCurrentUrl();
         String expected = "https://ourvirtualmarket.com/index.php?route=account/account";
         Assert.assertEquals(expected, actual);
+    }
+
+    public void verifyUnsuccessfulLogin() {
+        String actual = Driver.get().getCurrentUrl();
+        String expected = "https://ourvirtualmarket.com/index.php?route=account/login";
+        Assert.assertEquals(expected, actual);
+    }
+
+    public void verifyErrorMessage(String string) {
+        String actual = errorMessage.getText();
+        String expected = string;
+        Assert.assertEquals(expected, actual);
+    }
+
+    public void verifyNewCustomerTable() {
+        newCustomerTable.isDisplayed();
+    }
+
+    public void verifyReturningCustomerTable() {
+        returningCustomerTable.isDisplayed();
     }
 }
