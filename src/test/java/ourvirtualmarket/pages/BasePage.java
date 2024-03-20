@@ -1,6 +1,7 @@
 package ourvirtualmarket.pages;
 
 import com.github.javafaker.Faker;
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -12,13 +13,18 @@ public abstract class BasePage {
     }
     Faker faker=new Faker();
 
-
     @FindBy(xpath = "//button[@class='popup-close']")
     private WebElement subsPopupClose;
     @FindBy(xpath = "//input[@name='hidden-popup']")
     private WebElement subsCheckBox;
     @FindBy(xpath = "//div[@class='signin-w font-title hidden-sm hidden-xs']//a[text()='Register']")
     private WebElement registerBtn;
+    @FindBy(xpath = "//strong[normalize-space()='Home']")
+    private WebElement homeBtn;
+    @FindBy(xpath = "//div[@id='test-popup']//div[@class='popup-content']")
+    private WebElement subsPopUp;
+    @FindBy(xpath = "//div[@class='input-box']")
+    private WebElement bottomSubs;
 
     /**
      * This method closes the "popup" on the main page.
@@ -28,11 +34,26 @@ public abstract class BasePage {
         subsPopupClose.click();
     }
 
+    /**
+     * This method closes the "popup" on the main page without ticking the box.
+     */
     public void closePopUpWithoutCheckbox(){
         subsPopupClose.click();
     }
-
     public void navigateToRegisterPage(){
         registerBtn.click();
+    }
+
+    public void navigateToHomePage(){
+        homeBtn.click();
+    }
+    public void verifySubsPopUpIsVisible(){
+        subsPopUp.isDisplayed();
+    }
+    public void verifySubsPopUpIsNotVisible(){
+        //burayı yapamadım kafayı yicem sabahın 5'inde
+    }
+    public void verifyBottomSubsIsVisible(){
+        bottomSubs.isDisplayed();
     }
 }
