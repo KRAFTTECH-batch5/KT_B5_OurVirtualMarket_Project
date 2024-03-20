@@ -1,16 +1,20 @@
 package ourvirtualmarket.pages;
 
 import com.github.javafaker.Faker;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import ourvirtualmarket.utilities.Driver;
 
+import java.util.List;
+
 public abstract class BasePage {
     public BasePage() {
         PageFactory.initElements(Driver.get(), this);
     }
-    Faker faker=new Faker();
+
+    Faker faker = new Faker();
 
 
     @FindBy(xpath = "//button[@class='popup-close']")
@@ -19,22 +23,25 @@ public abstract class BasePage {
     private WebElement subsCheckBox;
     @FindBy(xpath = "//div[@class='signin-w font-title hidden-sm hidden-xs']//a[text()='Register']")
     private WebElement registerBtn;
-    @FindBy (xpath = "(//i[@class='fa fa-search'])[3]")
-    public WebElement alternativeSearchBtn;
+    @FindBy(xpath = "(//i[@class='fa fa-search'])[3]")
+    public WebElement l_alternativeSearchBtn;
 
-    @FindBy (xpath = "(//span[text()='Search'])[1]")
-    public WebElement searchText;
-    @FindBy (xpath = "(//input[@type='text'])[3]")
-    public WebElement searchArea;
+    @FindBy(xpath = "(//span[text()='Search'])[1]")
+    public WebElement l_searchText;
+    @FindBy(xpath = "(//input[@type='text'])[3]")
+    public WebElement l_searchArea;
 
-    @FindBy (xpath = "(//input[@name='search'])[2]")
-    public WebElement searchBoxBtn;
+    @FindBy(xpath = "(//input[@name='search'])[2]")
+    public WebElement l_searchBoxBtn;
 
-    @FindBy (xpath = "(//a[@class='popup-close'])[4]")
-    public WebElement toCloseSearchBox;
+    @FindBy(id = "button-search")
+    public WebElement l_searchBtn;
 
-    @FindBy (xpath = "(//div[@class='row']//b)[1]")
-    public WebElement welcomeMessage;
+    @FindBy(xpath = "(//a[@class='popup-close'])[4]")
+    public WebElement l_toCloseSearchBox;
+
+    @FindBy(xpath = "(//div[@class='row']//b)[1]")
+    public WebElement l_welcomeMessage;
 
     /**
      * This method closes the "popup" on the main page.
@@ -44,11 +51,18 @@ public abstract class BasePage {
         subsPopupClose.click();
     }
 
-    public void closePopUpWithoutCheckbox(){
+    public void closePopUpWithoutCheckbox() {
         subsPopupClose.click();
     }
 
-    public void navigateToRegisterPage(){
+    public void navigateToRegisterPage() {
         registerBtn.click();
     }
+
+    public void searchProduct(String productName) {
+        l_searchArea.sendKeys(productName);
+        l_searchBtn.click();
+    }
+
 }
+
