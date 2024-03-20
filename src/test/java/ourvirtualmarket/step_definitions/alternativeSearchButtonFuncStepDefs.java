@@ -3,10 +3,8 @@ package ourvirtualmarket.step_definitions;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import ourvirtualmarket.pages.BasePage;
 import ourvirtualmarket.pages.ProductComparisonPage;
 import ourvirtualmarket.utilities.Driver;
 
