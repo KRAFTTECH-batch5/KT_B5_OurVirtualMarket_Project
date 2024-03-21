@@ -2,6 +2,7 @@ package ourvirtualmarket.pages;
 
 import com.github.javafaker.Faker;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,6 +31,10 @@ public abstract class BasePage {
     private WebElement searchBtn;
     @FindBy(xpath = "//input[@name='search'][@class='autosearch-input form-control']")
     private WebElement searchBar;
+    @FindBy(xpath = "//div[@class='input-control']")
+    private WebElement emailBoxToSubs;
+    @FindBy(xpath = "//button[@class='btn btn-primary btn-default']")
+    private WebElement subsBtn;
 
     /**
      * This method closes the "popup" on the main page.
@@ -82,5 +87,16 @@ public abstract class BasePage {
     public void searchMethod(String SearchData){
        searchBar.sendKeys(SearchData);
        searchBtn.click();
+    }
+    /**
+     * This method is used to subscribe via the pop-up.
+     */
+    public void subscribeTo(){
+        emailBoxToSubs.sendKeys(faker.internet().emailAddress());
+        subsBtn.click();
+    }
+    public void verifySuccessfulSubs(String message){
+        String actual = "alert.getText()";
+        Assert.assertEquals(message,actual);
     }
 }
