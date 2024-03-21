@@ -31,7 +31,7 @@ public abstract class BasePage {
     private WebElement searchBtn;
     @FindBy(xpath = "//input[@name='search'][@class='autosearch-input form-control']")
     private WebElement searchBar;
-    @FindBy(xpath = "//div[@class='input-control']")
+    @FindBy(xpath = "(//input[@type='email'])[2]")
     private WebElement emailBoxToSubs;
     @FindBy(xpath = "//button[@class='btn btn-primary btn-default']")
     private WebElement subsBtn;
