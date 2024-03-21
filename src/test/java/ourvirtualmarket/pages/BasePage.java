@@ -1,15 +1,12 @@
 package ourvirtualmarket.pages;
 
 import com.github.javafaker.Faker;
-import org.openqa.selenium.By;
 import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import ourvirtualmarket.utilities.Driver;
 
-import java.util.List;
 
 public abstract class BasePage {
     public BasePage() {
@@ -17,7 +14,6 @@ public abstract class BasePage {
     }
 
     Faker faker = new Faker();
-
 
     @FindBy(xpath = "//button[@class='popup-close']")
     private WebElement subsPopupClose;
@@ -44,7 +40,6 @@ public abstract class BasePage {
         subsPopupClose.click();
     }
 
-    public void closePopUpWithoutCheckbox() {
     /**
      * This method closes the "popup" on the main page without ticking the box.
      */
@@ -53,7 +48,6 @@ public abstract class BasePage {
     }
 
     public void navigateToRegisterPage() {
-    public void navigateToRegisterPage(){
         registerBtn.click();
     }
 

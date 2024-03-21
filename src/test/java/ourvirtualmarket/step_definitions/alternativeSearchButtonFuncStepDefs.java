@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import ourvirtualmarket.pages.AlternativeSearchPage;
 import ourvirtualmarket.pages.SearchPage;
+import ourvirtualmarket.utilities.BrowserUtils;
 import ourvirtualmarket.utilities.Driver;
 
 
@@ -26,9 +27,9 @@ public class alternativeSearchButtonFuncStepDefs {
 
     @When("The user hovers the mouse over the alternative search button")
     public void the_user_hovers_the_mouse_over_the_alternative_search_button() {
-        Actions actions = new Actions(Driver.get());
+
         WebElement alternativeSearchBtn = alternativeSearchPage.l_alternativeSearchBtn;
-        actions.moveToElement(alternativeSearchBtn).perform();
+        BrowserUtils.hover(alternativeSearchBtn);
     }
 
     @Then("The {string} text appears next to the button when the mouse hovers over it")
@@ -60,21 +61,25 @@ public class alternativeSearchButtonFuncStepDefs {
         Assert.assertEquals("Welcome to Our Virtual Market !", text);
     }
 
-    @When("The user enters a product name : {string}")
+    @When("The user enters a product name {string}")
     public void the_user_enters_a_product_name(String productName) throws InterruptedException {
-        alternativeSearchPage.l_searchArea.clear();
         alternativeSearchPage.searchProduct(productName);
-        Thread.sleep(5000);
-    }
-
-    @When("The user enters a product name into the search box : {string}")
-    public void the_user_enters_a_product_name_into_the_search_box(String productName) {
-        searchPage.searchProduct(productName);
     }
 
     @When("The user clicks on the search button")
     public void the_user_clicks_on_the_search_button() {
         searchPage.clickOnSearchButton();
     }
-
+    @Then("The user should be redirected to a page containing {string}")
+    public void the_user_should_be_redirected_to_a_page_containing(String ProductName) {
+        alternativeSearchPage.verifyProduct(ProductName);
+    }
+    @When("The user enters an invalid product name {string}")
+    public void the_user_enters_an_invalid_product_name(String productName) {
+        alternativeSearchPage.searchProduct(productName);
+    }
+    @Then("The user should see an error message or notification indicating the invalid search attempt.")
+    public void the_user_should_see_an_error_message_or_notification_indicating_the_invalid_search_attempt() {
+        alternativeSearchPage.verifyErrorMessage();
+    }
 }
