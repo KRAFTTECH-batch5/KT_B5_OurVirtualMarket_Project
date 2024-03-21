@@ -2,8 +2,6 @@ package ourvirtualmarket.pages;
 
 import com.github.javafaker.Faker;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -35,6 +33,8 @@ public abstract class BasePage {
     private WebElement emailBoxToSubs;
     @FindBy(xpath = "//button[@class='btn btn-primary btn-default']")
     private WebElement subsBtn;
+    @FindBy(xpath = "//div[@role='alert']")
+    private WebElement validPopUpMessage;
 
     /**
      * This method closes the "popup" on the main page.
@@ -95,8 +95,9 @@ public abstract class BasePage {
         emailBoxToSubs.sendKeys(faker.internet().emailAddress());
         subsBtn.click();
     }
-    public void verifySuccessfulSubs(String message){
-        String actual = "alert.getText()";
-        Assert.assertEquals(message,actual);
+    public void verifySuccessfulSubs() throws InterruptedException {
+        String expectedMessage = " × Subcription was successfull";
+        String actualMessage = validPopUpMessage.getAttribute("textContent");
+        Assert.assertEquals(expectedMessage,actualMessage);
     }
 }

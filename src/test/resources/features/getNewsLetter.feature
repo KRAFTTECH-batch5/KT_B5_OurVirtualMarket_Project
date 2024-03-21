@@ -29,6 +29,6 @@ Feature: E-mail Subscription Test
     When The user clicks to HOME button
     Then The user should verify a pop-up message offering to subscribe to the mailing list
     When The user enters a valid email address in the subscription form and clicks Subscribe button
-    Then The user verifies that message "Subscription was successful" is displayed
+    Then The user verifies that message Subscription was successful is displayed
     Then The user should verify that the pop-up window disappears
 
