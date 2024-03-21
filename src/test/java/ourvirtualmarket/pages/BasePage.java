@@ -2,6 +2,8 @@ package ourvirtualmarket.pages;
 
 import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
+import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -23,7 +25,16 @@ public abstract class BasePage {
     private WebElement subsCheckBox;
     @FindBy(xpath = "//div[@class='signin-w font-title hidden-sm hidden-xs']//a[text()='Register']")
     private WebElement registerBtn;
-
+    @FindBy(xpath = "//strong[normalize-space()='Home']")
+    private WebElement homeBtn;
+    @FindBy(xpath = "//div[@id='test-popup']//div[@class='popup-content']")
+    private WebElement subsPopUp;
+    @FindBy(xpath = "//div[@class='input-box']")
+    private WebElement bottomSubs;
+    @FindBy(xpath = "//button[@name='submit_search']")
+    private WebElement searchBtn;
+    @FindBy(xpath = "//input[@name='search'][@class='autosearch-input form-control']")
+    private WebElement searchBar;
 
     /**
      * This method closes the "popup" on the main page.
@@ -34,13 +45,50 @@ public abstract class BasePage {
     }
 
     public void closePopUpWithoutCheckbox() {
+    /**
+     * This method closes the "popup" on the main page without ticking the box.
+     */
+    public void closePopUpWithoutCheckbox(){
         subsPopupClose.click();
     }
 
     public void navigateToRegisterPage() {
+    public void navigateToRegisterPage(){
         registerBtn.click();
     }
 
+    public void navigateToHomePage(){
+        homeBtn.click();
+    }
+    public void verifySubsPopUpIsVisible(){
+        subsPopUp.isDisplayed();
+    }
+    public void verifySubsPopUpIsNotVisible(){
+        //burayı yapamadım kafayı yicem sabahın 5'inde
+    }
+    public void verifyBottomSubsIsVisible(){
+        bottomSubs.isDisplayed();
+    }
+    /**
+     * This method verifies that the search button is displayed.
+     */
+    public void isSearchBtnDisplay(){Assert.assertTrue(searchBtn.isDisplayed());}
 
+    /**
+     * This method verifies that the search bar is displayed.
+     */
+    public void isSearchBarDisplay(){Assert.assertTrue(searchBar.isDisplayed());}
+
+    /**
+     * This method verifies that the search bar default text.
+     */
+    public void verifySearchBarDefaultText(String defaultText){
+        String expectedDefaultText= searchBar.getAttribute("placeholder");
+        String actualDefaultText= defaultText;
+        Assert.assertEquals(expectedDefaultText,actualDefaultText);
+    }
+    public void searchMethod(String SearchData){
+       searchBar.sendKeys(SearchData);
+       searchBtn.click();
+    }
 }
-
