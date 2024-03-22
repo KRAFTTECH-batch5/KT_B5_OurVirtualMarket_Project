@@ -16,10 +16,19 @@ Feature: E-mail Subscription Test
     * The user enters the e-mail and password information and clicks the LOGIN button
     * The user should be able to log in
 
-    @emre
-    Scenario: Cancel Subscription Popup | Positive Test
-      When The user clicks to HOME button
-      Then The user should verify a pop-up message offering to subscribe to the mailing list
-      When The user clicks on the X close button on the pop-up
-      Then The user should verify that the pop-up window disappears
-      Then The user should be able to continue subscribing using the banner at the bottom
+
+  Scenario: Cancel Subscription Popup | Positive Test
+    When The user clicks to HOME button
+    Then The user should verify a pop-up message offering to subscribe to the mailing list
+    When The user clicks on the X close button on the pop-up
+    Then The user should verify that the pop-up window disappears
+    Then The user should be able to continue subscribing using the banner at the bottom
+
+  @emre
+  Scenario: Valid Subscription | Positive Test
+    When The user clicks to HOME button
+    Then The user should verify a pop-up message offering to subscribe to the mailing list
+    When The user enters a valid email address in the subscription form and clicks Subscribe button
+    Then The user verifies that message Subscription was successful is displayed
+    Then The user should verify that the pop-up window disappears
+

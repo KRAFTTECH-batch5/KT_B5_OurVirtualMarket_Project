@@ -41,4 +41,14 @@ public class GetNewsLetterStepDefs {
         loginPage.verifyBottomSubsIsVisible();
     }
 
+    @When("The user enters a valid email address in the subscription form and clicks Subscribe button")
+    public void the_user_enters_a_valid_email_address_in_the_subscription_form_and_clicks_subscribe_button() {
+        loginPage.subscribeTo();
+    }
+    @Then("The user verifies that message Subscription was successful is displayed")
+    public void the_user_verifies_that_message_subscription_was_successful_is_displayed() throws InterruptedException {
+        loginPage.verifySuccessfulSubs();
+    }
+
+
 }
