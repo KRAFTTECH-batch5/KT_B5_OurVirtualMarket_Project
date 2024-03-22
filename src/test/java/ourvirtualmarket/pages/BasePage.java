@@ -1,11 +1,15 @@
 package ourvirtualmarket.pages;
 
 import com.github.javafaker.Faker;
+import io.cucumber.java.zh_cn.假如;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import ourvirtualmarket.utilities.BrowserUtils;
 import ourvirtualmarket.utilities.Driver;
+
+import java.util.List;
 
 
 public abstract class BasePage {
@@ -37,6 +41,24 @@ public abstract class BasePage {
     private WebElement subsBtn;
     @FindBy(xpath = "//div[@role='alert']")
     private WebElement validPopUpMessage;
+
+    @FindBy(xpath = "//button[@class='btn-link dropdown-toggle']")
+    private WebElement currencyswitchingBtn;
+
+    @FindBy(xpath = "//button[contains(text(),'$ US Dollar')]")
+    private WebElement displayedtodollar;
+
+    @FindBy(xpath = "//button[@name='EUR']")
+    private WebElement EuroBtn;
+
+    @FindBy(xpath = "//button[normalize-space()='£ Pound Sterling']")
+    private WebElement PoundSterlingBtn;
+
+    @FindBy(xpath = "//span[@class='items_carts']")
+    private WebElement verifytoprice;
+
+
+
 
     /**
      * This method closes the "popup" on the main page.
@@ -103,4 +125,37 @@ public abstract class BasePage {
         String actualMessage = validPopUpMessage.getAttribute("textContent");
         Assert.assertEquals(expectedMessage,actualMessage);
     }
+
+    public void verifytoDollar() {
+        String expected = displayedtodollar.getText();
+        String actual = "$";
+        Assert.assertTrue(expected.contains(actual));
+    }
+
+    public void clickcurrencybtn(){
+        currencyswitchingBtn.click();
+
+    }
+    public void clicktoeurobtn(){
+        EuroBtn.click();
+        homeBtn.click();
+    }
+
+    public void verifytoeuro() {
+        String expected = verifytoprice.getText();
+        String actual = "€";
+        Assert.assertTrue(expected.contains(actual));
+    }
+
+    public void clicktopoundSterlinbtn(){
+        PoundSterlingBtn.click();
+        homeBtn.click();
+    }
+
+    public void verifytopoundSterlin() {
+        String expected = verifytoprice.getText();
+        String actual = "£";
+        Assert.assertTrue(expected.contains(actual));
+    }
+
 }
