@@ -1,4 +1,5 @@
 package ourvirtualmarket.pages;
 
-public class ProductComparisonPage extends BasePage{
+public class ProductComparisonPage extends BasePage {
+
 }

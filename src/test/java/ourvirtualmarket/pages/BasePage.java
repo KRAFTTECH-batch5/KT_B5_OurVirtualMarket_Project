@@ -7,11 +7,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import ourvirtualmarket.utilities.Driver;
 
+
 public abstract class BasePage {
     public BasePage() {
         PageFactory.initElements(Driver.get(), this);
     }
-    Faker faker=new Faker();
+
+    Faker faker = new Faker();
 
     @FindBy(xpath = "//button[@class='popup-close']")
     private WebElement subsPopupClose;
@@ -50,7 +52,8 @@ public abstract class BasePage {
     public void closePopUpWithoutCheckbox(){
         subsPopupClose.click();
     }
-    public void navigateToRegisterPage(){
+
+    public void navigateToRegisterPage() {
         registerBtn.click();
     }
 
