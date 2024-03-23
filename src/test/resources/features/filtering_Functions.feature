@@ -9,7 +9,6 @@ Feature: Searching for products with filtering functionality
     * The user clicks on any 'Television'
 
 
-  @dincer
   Scenario: Show and hide filtering options
     When I click the first down arrow
     Then the search functionality should be hidden or shown
@@ -17,3 +16,9 @@ Feature: Searching for products with filtering functionality
     Then the number of products should be hidden or shown
     When I click the third down arrow
     Then the price range tabs should be hidden or shown
+
+  @Filtering
+  Scenario: Filter products by text
+    When The user searches any product on the search bar as "TV"
+#    Then The user should be redirected to the search page related to "TV".
+    Then The user should be redirected to a page containing "TV"
