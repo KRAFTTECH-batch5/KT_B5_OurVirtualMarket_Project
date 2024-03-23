@@ -2,6 +2,7 @@ package ourvirtualmarket.pages;
 
 import com.github.javafaker.Faker;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -14,6 +15,7 @@ public abstract class BasePage {
     }
 
     Faker faker = new Faker();
+    JavascriptExecutor js;
 
     @FindBy(xpath = "//button[@class='popup-close']")
     private WebElement subsPopupClose;
@@ -36,7 +38,11 @@ public abstract class BasePage {
     @FindBy(xpath = "//button[@class='btn btn-primary btn-default']")
     private WebElement subsBtn;
     @FindBy(xpath = "//div[@role='alert']")
-    private WebElement validPopUpMessage;
+    private WebElement subsAlertMessage;
+    @FindBy(xpath = "//input[@id='txtemail']")
+    private WebElement emailInputBoxBottomSubs;
+    @FindBy(xpath = "//button[normalize-space()='Subscribe']")
+    private WebElement subBtnBottom;
 
     /**
      * This method closes the "popup" on the main page.
@@ -56,16 +62,27 @@ public abstract class BasePage {
     public void navigateToRegisterPage() {
         registerBtn.click();
     }
-
+    /**
+     * This method is used to go to the home page.
+     */
     public void navigateToHomePage(){
         homeBtn.click();
     }
+    /**
+     * This method is used to verify that the subscription pop-up has been opened.
+     */
     public void verifySubsPopUpIsVisible(){
         subsPopUp.isDisplayed();
     }
+    /**
+     * Bu yöntemi inşallah bir gün kullanacağız.
+     */
     public void verifySubsPopUpIsNotVisible(){
         //burayı yapamadım kafayı yicem sabahın 5'inde
     }
+    /**
+     * This method is used to verify that the subscription banner appears at the bottom of the page.
+     */
     public void verifyBottomSubsIsVisible(){
         bottomSubs.isDisplayed();
     }
@@ -98,9 +115,34 @@ public abstract class BasePage {
         emailBoxToSubs.sendKeys(faker.internet().emailAddress());
         subsBtn.click();
     }
-    public void verifySuccessfulSubs() throws InterruptedException {
+    /**
+     * This method is used to verify the valid subscription message.
+     */
+    public void verifySuccessfulSubs(){
         String expectedMessage = " × Subcription was successfull";
-        String actualMessage = validPopUpMessage.getAttribute("textContent");
+        String actualMessage = subsAlertMessage.getAttribute("textContent");
+        Assert.assertEquals(expectedMessage,actualMessage);
+    }
+    /**
+     * This method is used to scroll the page to the bottom.
+     */
+    public void scrollsDownThePageToTheBottom(){
+        js = (JavascriptExecutor) Driver.get();
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    }
+    /**
+     * This method is used to subscribe via the subscription at the bottom of the page.
+     */
+    public void subscribeToBottomSubs(String email){
+        emailInputBoxBottomSubs.sendKeys(email);
+        subBtnBottom.click();
+    }
+    /**
+     * This method is used to verify the incoming message when trying to subscribe with the same e-mail.
+     */
+    public void verifySameEmailMessage(){
+        String expectedMessage = " × Email has already exist";
+        String actualMessage = subsAlertMessage.getAttribute("textContent");
         Assert.assertEquals(expectedMessage,actualMessage);
     }
 }
