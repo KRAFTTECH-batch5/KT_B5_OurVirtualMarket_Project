@@ -1,10 +1,13 @@
 package ourvirtualmarket.pages;
 
 import com.github.javafaker.Faker;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import ourvirtualmarket.utilities.BrowserUtils;
 import ourvirtualmarket.utilities.Driver;
 
 
@@ -37,6 +40,8 @@ public abstract class BasePage {
     private WebElement subsBtn;
     @FindBy(xpath = "//div[@role='alert']")
     private WebElement validPopUpMessage;
+    @FindBy(xpath = "//span[@class='items_cart']")
+    private WebElement addToCard;
 
     /**
      * This method closes the "popup" on the main page.
@@ -49,7 +54,7 @@ public abstract class BasePage {
     /**
      * This method closes the "popup" on the main page without ticking the box.
      */
-    public void closePopUpWithoutCheckbox(){
+    public void closePopUpWithoutCheckbox() {
         subsPopupClose.click();
     }
 
@@ -57,50 +62,75 @@ public abstract class BasePage {
         registerBtn.click();
     }
 
-    public void navigateToHomePage(){
+    public void navigateToHomePage() {
         homeBtn.click();
     }
-    public void verifySubsPopUpIsVisible(){
+
+    public void verifySubsPopUpIsVisible() {
         subsPopUp.isDisplayed();
     }
-    public void verifySubsPopUpIsNotVisible(){
+
+    public void verifySubsPopUpIsNotVisible() {
         //burayı yapamadım kafayı yicem sabahın 5'inde
     }
-    public void verifyBottomSubsIsVisible(){
+
+    public void verifyBottomSubsIsVisible() {
         bottomSubs.isDisplayed();
     }
+
     /**
      * This method verifies that the search button is displayed.
      */
-    public void isSearchBtnDisplay(){Assert.assertTrue(searchBtn.isDisplayed());}
+    public void isSearchBtnDisplay() {
+        Assert.assertTrue(searchBtn.isDisplayed());
+    }
 
     /**
      * This method verifies that the search bar is displayed.
      */
-    public void isSearchBarDisplay(){Assert.assertTrue(searchBar.isDisplayed());}
+    public void isSearchBarDisplay() {
+        Assert.assertTrue(searchBar.isDisplayed());
+    }
 
     /**
      * This method verifies that the search bar default text.
      */
-    public void verifySearchBarDefaultText(String defaultText){
-        String expectedDefaultText= searchBar.getAttribute("placeholder");
-        String actualDefaultText= defaultText;
-        Assert.assertEquals(expectedDefaultText,actualDefaultText);
+    public void verifySearchBarDefaultText(String defaultText) {
+        String expectedDefaultText = searchBar.getAttribute("placeholder");
+        String actualDefaultText = defaultText;
+        Assert.assertEquals(expectedDefaultText, actualDefaultText);
     }
-    public void searchMethod(String SearchData){
-       searchBar.sendKeys(SearchData);
-       searchBtn.click();
+
+    public void searchMethod(String SearchData) {
+        searchBar.sendKeys(SearchData);
+        searchBtn.click();
     }
+
     /**
      * This method is used to subscribe via the pop-up.
      */
-    public void subscribeTo(){
+    public void subscribeTo() {
         emailBoxToSubs.sendKeys(faker.internet().emailAddress());
         subsBtn.click();
     }
+
     public void verifySuccessfulSubs() throws InterruptedException {
         String expectedMessage = " × Subcription was successfull";
         String actualMessage = validPopUpMessage.getAttribute("textContent");
-        Assert.assertEquals(expectedMessage,actualMessage);
+        Assert.assertEquals(expectedMessage, actualMessage);
+    }
+
+    public void productControl() {
+        String actual = addToCard.getText();
+        int actualCount = Integer.parseInt(actual);
+        int expectedCount = 1;
+        Assert.assertTrue(actualCount >= expectedCount);
+    }
+
+    @When("the user hovers over any product & the add to card button should appear")
+    public void the_user_hovers_over_any_product() {
+        WebElement element = Driver.get().findElement(By.xpath("(//*[@*='addToCart btn-button'])[4]"));
+        BrowserUtils.waitFor(3);
+        Assert.assertTrue(element.isDisplayed());
     }
 }
