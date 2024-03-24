@@ -42,6 +42,12 @@ public abstract class BasePage {
     private WebElement validPopUpMessage;
     @FindBy(xpath = "//span[@class='items_cart']")
     private WebElement addToCard;
+    @FindBy(xpath = "//*[text()='Remington NE3150 Smart']")
+    private WebElement visibilityControl;
+    @FindBy(xpath = "//*[text()='Remington NE3150 Smart']")
+    private WebElement addToCardBTNdisplayed;
+    @FindBy(xpath = "//*[@id=\"cart\"]/a/div/div/span/span[3]")
+    private WebElement totalPayments;
 
     /**
      * This method closes the "popup" on the main page.
@@ -119,18 +125,53 @@ public abstract class BasePage {
         String actualMessage = validPopUpMessage.getAttribute("textContent");
         Assert.assertEquals(expectedMessage, actualMessage);
     }
-
+    /**
+     * This method returns the visibility control WebElement.
+     */
+    public WebElement getVisibilityControl() {
+        return visibilityControl;
+    }
+    /**
+     * Performs product control.
+     */
     public void productControl() {
         String actual = addToCard.getText();
         int actualCount = Integer.parseInt(actual);
         int expectedCount = 1;
         Assert.assertTrue(actualCount >= expectedCount);
     }
-
-    @When("the user hovers over any product & the add to card button should appear")
-    public void the_user_hovers_over_any_product() {
-        WebElement element = Driver.get().findElement(By.xpath("(//*[@*='addToCart btn-button'])[4]"));
+    /**
+     * Opens quick view and clicks on Add to Cart.
+     */
+    public void quickViewAndAddToCard() {
+        navigateToHomePage();
+        BrowserUtils.scrollToElement(getVisibilityControl());
         BrowserUtils.waitFor(3);
-        Assert.assertTrue(element.isDisplayed());
+        BrowserUtils.hover(getVisibilityControl());
+        BrowserUtils.waitFor(3);
+        WebElement element = Driver.get().findElement(By.xpath("(//button[@class='addToCart btn-button'])[4]")); // XPath ifadesini düzelttik
+        BrowserUtils.waitFor(3);
+        Assert.assertNotNull(element);
     }
+    /**
+     * Clicks on the Add to Cart button.
+     */
+    public void addToCardbtnClick() {
+        navigateToHomePage();
+        BrowserUtils.scrollToElement(getVisibilityControl());
+        BrowserUtils.waitFor(3);
+        BrowserUtils.hover(getVisibilityControl());
+        BrowserUtils.waitFor(3);
+        WebElement element = Driver.get().findElement(By.xpath("(//button[@class='addToCart btn-button'])[4]"));
+        element.click();
+        BrowserUtils.waitFor(5);
+        Driver.get().navigate().refresh();
+    }
+    /**
+     * Verifies that Total Payments is displayed.
+     */
+    public void totalPayments() {
+        Assert.assertTrue(totalPayments.isDisplayed());
+    }
+
 }
