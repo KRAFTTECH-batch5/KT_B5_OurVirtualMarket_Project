@@ -50,6 +50,8 @@ public abstract class BasePage {
     private WebElement visibilityWishList3;
     @FindBy(xpath = "//button[contains(@onclick, wishlist.add('5719773'))]")
     private WebElement addToWishListButtonClick;
+    @FindBy(xpath = "(//button[@class='wishlist btn-button'])[4]")
+    private WebElement wishListremigthbtn;
 
 
     /**
@@ -133,30 +135,12 @@ public abstract class BasePage {
         return new WebElement[]{visibilityWishList1, visibilityWishList2, visibilityWishList3};
     }
 
-    public void wishList() {
-//        WebElement[] elements = getVisibilityWishLists();
-//
-//        for (WebElement element : elements) {
-//            navigateToHomePage();
-//            BrowserUtils.scrollToElement(element);
-//            BrowserUtils.waitFor(3);
-//            BrowserUtils.hover(element);
-//            BrowserUtils.waitFor(3);
-
-//        navigateToHomePage();
-//        BrowserUtils.scrollToElement(visibilityWishList1);
-//        BrowserUtils.waitFor(5);
-//        BrowserUtils.hover(visibilityWishList1);
-//        BrowserUtils.waitFor(5);
-//        addToWishListButtonClick.click();
-        navigateToHomePage();
-        BrowserUtils.scrollToElement(visibilityWishList1);
-        BrowserUtils.waitFor(3);
+    public void hoverAndClickWishList() {
+        BrowserUtils.waitFor(2);
         BrowserUtils.hover(visibilityWishList1);
-        BrowserUtils.waitFor(3);
-        addToWishListButtonClick.click();
-        BrowserUtils.waitFor(5);
-        Driver.get().navigate().refresh();
+        BrowserUtils.waitFor(2);
+        wishListremigthbtn.click();
+
     }
 
 
