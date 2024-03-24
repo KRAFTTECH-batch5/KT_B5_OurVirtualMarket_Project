@@ -4,6 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import ourvirtualmarket.pages.LoginPage;
+import ourvirtualmarket.utilities.BrowserUtils;
 import ourvirtualmarket.utilities.ConfigurationReader;
 import ourvirtualmarket.utilities.Driver;
 
@@ -15,6 +16,8 @@ public class quickViewStepDefs {
         loginPage.closePopUp();
         loginPage.clickLoginButton();
         loginPage.login("muhammedincesu27@gmail.com", "230797.");
+        BrowserUtils.waitFor(2);
+
     }
 
     @When("the user hovers over a product and clicks {string}")
