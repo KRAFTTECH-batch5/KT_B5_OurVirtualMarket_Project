@@ -2,9 +2,13 @@ package ourvirtualmarket.pages;
 
 import com.github.javafaker.Faker;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import ourvirtualmarket.utilities.BrowserUtils;
 import ourvirtualmarket.utilities.Driver;
 
 
@@ -38,6 +42,16 @@ public abstract class BasePage {
     @FindBy(xpath = "//div[@role='alert']")
     private WebElement validPopUpMessage;
 
+    @FindBy(xpath = "//*[text()='Remington NE3150 Smart']")
+    private WebElement visibilityWishList1;
+    @FindBy(xpath = "//img[@alt='Noerden Minimi Smart Body Scale']")
+    private WebElement visibilityWishList2;
+    @FindBy(xpath = "//img[@alt='Nicky Clarke NHD146 Hair Therapy Touch Control Hair Dryer']")
+    private WebElement visibilityWishList3;
+    @FindBy(xpath = "//button[contains(@onclick, wishlist.add('5719773'))]")
+    private WebElement addToWishListButtonClick;
+
+
     /**
      * This method closes the "popup" on the main page.
      */
@@ -49,7 +63,7 @@ public abstract class BasePage {
     /**
      * This method closes the "popup" on the main page without ticking the box.
      */
-    public void closePopUpWithoutCheckbox(){
+    public void closePopUpWithoutCheckbox() {
         subsPopupClose.click();
     }
 
@@ -57,50 +71,93 @@ public abstract class BasePage {
         registerBtn.click();
     }
 
-    public void navigateToHomePage(){
+    public void navigateToHomePage() {
         homeBtn.click();
     }
-    public void verifySubsPopUpIsVisible(){
+
+    public void verifySubsPopUpIsVisible() {
         subsPopUp.isDisplayed();
     }
-    public void verifySubsPopUpIsNotVisible(){
+
+    public void verifySubsPopUpIsNotVisible() {
         //burayı yapamadım kafayı yicem sabahın 5'inde
     }
-    public void verifyBottomSubsIsVisible(){
+
+    public void verifyBottomSubsIsVisible() {
         bottomSubs.isDisplayed();
     }
+
     /**
      * This method verifies that the search button is displayed.
      */
-    public void isSearchBtnDisplay(){Assert.assertTrue(searchBtn.isDisplayed());}
+    public void isSearchBtnDisplay() {
+        Assert.assertTrue(searchBtn.isDisplayed());
+    }
 
     /**
      * This method verifies that the search bar is displayed.
      */
-    public void isSearchBarDisplay(){Assert.assertTrue(searchBar.isDisplayed());}
+    public void isSearchBarDisplay() {
+        Assert.assertTrue(searchBar.isDisplayed());
+    }
 
     /**
      * This method verifies that the search bar default text.
      */
-    public void verifySearchBarDefaultText(String defaultText){
-        String expectedDefaultText= searchBar.getAttribute("placeholder");
-        String actualDefaultText= defaultText;
-        Assert.assertEquals(expectedDefaultText,actualDefaultText);
+    public void verifySearchBarDefaultText(String defaultText) {
+        String expectedDefaultText = searchBar.getAttribute("placeholder");
+        String actualDefaultText = defaultText;
+        Assert.assertEquals(expectedDefaultText, actualDefaultText);
     }
-    public void searchMethod(String SearchData){
-       searchBar.sendKeys(SearchData);
-       searchBtn.click();
+
+    public void searchMethod(String SearchData) {
+        searchBar.sendKeys(SearchData);
+        searchBtn.click();
     }
+
     /**
      * This method is used to subscribe via the pop-up.
      */
-    public void subscribeTo(){
+    public void subscribeTo() {
         emailBoxToSubs.sendKeys(faker.internet().emailAddress());
         subsBtn.click();
     }
+
     public void verifySuccessfulSubs() throws InterruptedException {
         String expectedMessage = " × Subcription was successfull";
         String actualMessage = validPopUpMessage.getAttribute("textContent");
-        Assert.assertEquals(expectedMessage,actualMessage);
+        Assert.assertEquals(expectedMessage, actualMessage);
     }
+
+    public WebElement[] getVisibilityWishLists() {
+        return new WebElement[]{visibilityWishList1, visibilityWishList2, visibilityWishList3};
+    }
+
+    public void wishList() {
+//        WebElement[] elements = getVisibilityWishLists();
+//
+//        for (WebElement element : elements) {
+//            navigateToHomePage();
+//            BrowserUtils.scrollToElement(element);
+//            BrowserUtils.waitFor(3);
+//            BrowserUtils.hover(element);
+//            BrowserUtils.waitFor(3);
+
+//        navigateToHomePage();
+//        BrowserUtils.scrollToElement(visibilityWishList1);
+//        BrowserUtils.waitFor(5);
+//        BrowserUtils.hover(visibilityWishList1);
+//        BrowserUtils.waitFor(5);
+//        addToWishListButtonClick.click();
+        navigateToHomePage();
+        BrowserUtils.scrollToElement(visibilityWishList1);
+        BrowserUtils.waitFor(3);
+        BrowserUtils.hover(visibilityWishList1);
+        BrowserUtils.waitFor(3);
+        addToWishListButtonClick.click();
+        BrowserUtils.waitFor(5);
+        Driver.get().navigate().refresh();
+    }
+
+
 }
