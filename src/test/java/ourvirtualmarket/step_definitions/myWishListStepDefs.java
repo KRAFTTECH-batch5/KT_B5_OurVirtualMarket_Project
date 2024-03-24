@@ -25,14 +25,14 @@ public class myWishListStepDefs {
         loginPage.hoverAndClickWishList();
     }
 
-    @Then("The user clicks on the Add to my wishlist button among the small buttons.")
-    public void the_user_clicks_on_the_button_among_the_small_buttons() {
-
-    }
+//    @Then("The user clicks on the Add to my wishlist button among the small buttons.")
+//    public void the_user_clicks_on_the_button_among_the_small_buttons() {
+//
+//    }
 
     @Then("The user sees a success message at the top of the page confirming that the item has been added to the wishlist.")
     public void the_user_sees_a_success_message_at_the_top_of_the_page_confirming_that_the_item_has_been_added_to_the_wishlist() {
-
+        loginPage.popUpSuccefly();
     }
 
     @When("The user clicks on the Heart Icon in the upper right corner of the page")

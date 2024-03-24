@@ -8,8 +8,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ourvirtualmarket.utilities.BrowserUtils;
 import ourvirtualmarket.utilities.Driver;
+
+import java.time.Duration;
 
 
 public abstract class BasePage {
@@ -52,6 +56,8 @@ public abstract class BasePage {
     private WebElement addToWishListButtonClick;
     @FindBy(xpath = "(//button[@class='wishlist btn-button'])[4]")
     private WebElement wishListremigthbtn;
+    @FindBy(xpath = "//div[@class='alert alert-success fadeOut']/a[.='Remington NE3150 Smart']")
+    private WebElement popUpSuccesFuly;
 
 
     /**
@@ -143,5 +149,12 @@ public abstract class BasePage {
 
     }
 
+    public void popUpSuccefly() {
 
+
+        String abs = popUpSuccesFuly.getText();
+        System.out.println("abs = " + abs);
+    }
 }
+
+
