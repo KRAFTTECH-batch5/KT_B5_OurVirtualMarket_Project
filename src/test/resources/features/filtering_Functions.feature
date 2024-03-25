@@ -31,3 +31,5 @@ Feature: Searching for products with filtering functionality
   Scenario: Filter products by price range
     When The user sets the price range from minPrice to maxPrice
     Then The user sees the results should only contain products within the specified price range
+
+    burada deneme yapiyoruz olur oyle seyler arada deneriz biz
