@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.DefaultElementLocator;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ourvirtualmarket.utilities.BrowserUtils;
@@ -58,7 +59,10 @@ public abstract class BasePage {
     private WebElement wishListremigthbtn;
     @FindBy(xpath = "//div[@class='alert alert-success fadeOut']/a[.='Remington NE3150 Smart']")
     private WebElement popUpSuccesFuly;
-
+    @FindBy(xpath = "//*[@id=\"wishlist-total\"]")
+    private WebElement wishListBtn;
+    @FindBy(xpath = "//*[@id=\"content\"]/div[1]/table/tbody/tr/td[2]/a")
+    private WebElement wishListNotEmpty;
 
     /**
      * This method closes the "popup" on the main page.
@@ -150,10 +154,15 @@ public abstract class BasePage {
     }
 
     public void popUpSuccefly() {
-
-
         String abs = popUpSuccesFuly.getText();
         System.out.println("abs = " + abs);
+    }
+
+    public void orientationToPage() {
+        wishListBtn.click();
+        wishListNotEmpty.isDisplayed();
+
+
     }
 }
 
