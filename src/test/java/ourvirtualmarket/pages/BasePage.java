@@ -134,17 +134,26 @@ public abstract class BasePage {
         emailBoxToSubs.sendKeys(faker.internet().emailAddress());
         subsBtn.click();
     }
+    /**
+     * This method retrieves the visibility wish lists.
+     * @return The visibility wish lists
+     */
 
     public void verifySuccessfulSubs() throws InterruptedException {
         String expectedMessage = " × Subcription was successfull";
         String actualMessage = validPopUpMessage.getAttribute("textContent");
         Assert.assertEquals(expectedMessage, actualMessage);
     }
+    /**
+     * This method hovers over the wish list and clicks it.
+     */
 
     public WebElement[] getVisibilityWishLists() {
         return new WebElement[]{visibilityWishList1, visibilityWishList2, visibilityWishList3};
     }
-
+    /**
+     * This method retrieves the success pop-up and prints it.
+     */
     public void hoverAndClickWishList() {
         BrowserUtils.waitFor(2);
         BrowserUtils.hover(visibilityWishList1);
@@ -152,16 +161,19 @@ public abstract class BasePage {
         wishListremigthbtn.click();
 
     }
-
+    /**
+     * This method navigates to the page and verifies if the wish list is not empty.
+     */
     public void popUpSuccefly() {
         String abs = popUpSuccesFuly.getText();
         System.out.println("abs = " + abs);
     }
-
+    /**
+     * This method is used to subscribe via the pop-up.
+     */
     public void orientationToPage() {
         wishListBtn.click();
         wishListNotEmpty.isDisplayed();
-
 
     }
 }
