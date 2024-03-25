@@ -49,12 +49,6 @@ public abstract class BasePage {
 
     @FindBy(xpath = "//*[text()='Remington NE3150 Smart']")
     private WebElement visibilityWishList1;
-    @FindBy(xpath = "//img[@alt='Noerden Minimi Smart Body Scale']")
-    private WebElement visibilityWishList2;
-    @FindBy(xpath = "//img[@alt='Nicky Clarke NHD146 Hair Therapy Touch Control Hair Dryer']")
-    private WebElement visibilityWishList3;
-    @FindBy(xpath = "//button[contains(@onclick, wishlist.add('5719773'))]")
-    private WebElement addToWishListButtonClick;
     @FindBy(xpath = "(//button[@class='wishlist btn-button'])[4]")
     private WebElement wishListremigthbtn;
     @FindBy(xpath = "//div[@class='alert alert-success fadeOut']/a[.='Remington NE3150 Smart']")
@@ -144,13 +138,7 @@ public abstract class BasePage {
         String actualMessage = validPopUpMessage.getAttribute("textContent");
         Assert.assertEquals(expectedMessage, actualMessage);
     }
-    /**
-     * This method hovers over the wish list and clicks it.
-     */
 
-    public WebElement[] getVisibilityWishLists() {
-        return new WebElement[]{visibilityWishList1, visibilityWishList2, visibilityWishList3};
-    }
     /**
      * This method retrieves the success pop-up and prints it.
      */
@@ -159,7 +147,6 @@ public abstract class BasePage {
         BrowserUtils.hover(visibilityWishList1);
         BrowserUtils.waitFor(2);
         wishListremigthbtn.click();
-
     }
     /**
      * This method navigates to the page and verifies if the wish list is not empty.
