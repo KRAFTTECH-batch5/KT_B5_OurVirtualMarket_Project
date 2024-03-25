@@ -1,3 +1,4 @@
+
 Feature: Searching for products with filtering functionality
 
   Background:
@@ -17,8 +18,16 @@ Feature: Searching for products with filtering functionality
     When I click the third down arrow
     Then the price range tabs should be hidden or shown
 
-  @Filtering
+
   Scenario: Filter products by text
-    When The user searches any product on the search bar as "TV"
-#    Then The user should be redirected to the search page related to "TV".
-    Then The user should be redirected to a page containing "TV"
+    When The user searches any product on the search bar as "Cello"
+    Then The user should navigate to a page containing "Cello"
+
+
+  Scenario: Viewing Total Number of Items under the Manufacturer Tab
+    Then The user expects to see the total number of items displayed without any filtering applied as default
+
+  @Filtering
+  Scenario: Filter products by price range
+    When The user sets the price range from minPrice to maxPrice
+    Then The user sees the results should only contain products within the specified price range

@@ -15,8 +15,10 @@ import java.time.Duration;
 
 
 public class Filtering_Functions_StepDefs {
-
     FilteringFuncsPage filteringFuncsPage = new FilteringFuncsPage();
+
+    String minPrice = "150";
+    String maxPrice = "250";
 
     @Given("The user lands on the main product options")
     public void the_user_lands_on_the_main_product_options() {
@@ -64,10 +66,26 @@ public class Filtering_Functions_StepDefs {
         filteringFuncsPage.searchProduct(productName);
     }
 
-//    @Then("The user should be redirected to the search page related to {string}.")
-//    public void the_user_should_be_redirected_to_the_search_page_related_to(String string) {
-//        filteringFuncsPage.verifyThatTheSearchPageContainsValidProducts(string);
-//    }
+    @Then("The user should navigate to a page containing {string}")
+    public void the_user_should_be_redirected_to_the_search_page_related_to(String string) throws InterruptedException {
+        filteringFuncsPage.verifyValidProducts(string);
+    }
+
+    @Then("The user expects to see the total number of items displayed without any filtering applied as default")
+    public void the_user_expects_to_see_the_total_number_of_items_displayed_without_any_filtering_applied_as_default() {
+
+    }
+
+    @When("The user sets the price range from minPrice to maxPrice")
+    public void the_user_sets_the_price_range_from_to() {
+        filteringFuncsPage.setPriceRange(minPrice, maxPrice);
+
+    }
+
+    @Then("The user sees the results should only contain products within the specified price range")
+    public void the_user_sees_the_results_should_only_contain_products_within_the_specified_price_range() {
+        filteringFuncsPage.getProductPrices();
+    }
 
 
 }
