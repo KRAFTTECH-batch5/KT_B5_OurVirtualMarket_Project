@@ -41,6 +41,21 @@ public class FilteringFuncsPage extends BasePage{
     @FindBy(className = "price-new")
     public List<WebElement> productPrices;
 
+    @FindBy(xpath = "//a[@id='btn_resetAll']")
+    public WebElement l_resetAllBtn;
+
+    @FindBy(xpath = "//span[@class='fa fa-square-o']")
+    public WebElement l_palmCheckBox;
+
+    @FindBy(xpath = "//input[@class='input_min form-control']")
+    public WebElement l_minPrice;
+
+    @FindBy(xpath = "//input[@class='input_max form-control']")
+    public WebElement l_maxPrice;
+
+    @FindBy(xpath = "//div[@class='col-xs-12']")
+    public WebElement l_notProduct;
+
     public void clickOnMainProductOpts() {
         WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(2));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='navbar-header'])[2]")));
@@ -123,13 +138,43 @@ public class FilteringFuncsPage extends BasePage{
         System.out.println(productPriceList);
         for (String prices : productPriceList) {
             String sub = prices.substring(1,4);
-            if (Integer.valueOf(sub)>150&&Integer.valueOf(sub)<250) {
+            if (Integer.parseInt(sub)>150&&Integer.parseInt(sub)<250) {
                 Assert.assertTrue(sub,true);
             } else {
                 Assert.fail();
             }
         }
     }
+
+    public void clickResetAllBtn() {
+        l_resetAllBtn.click();
+    }
+
+    public void checkSearchBarIsEmpty() {
+        BrowserUtils.waitFor(2);
+        if (l_SearchBar.getAttribute("value").isEmpty()) {
+            Assert.assertTrue(true);
+        } else {
+            Assert.fail();
+        }
+    }
+
+    public void palmIsSelected(){
+        Assert.assertFalse(l_palmCheckBox.isSelected());
+    }
+
+    public void verifyMinMaxPrice() {
+        String valueMin = l_minPrice.getAttribute("value");
+        String valueMax = l_maxPrice.getAttribute("value");
+       Assert.assertEquals("103",valueMin);
+       Assert.assertEquals("500",valueMax);
+    }
+
+    public void verifyNotProduct() {
+        String warningMessage = l_notProduct.getText();
+        Assert.assertEquals("Not product",warningMessage);
+    }
+
 
 
 }
