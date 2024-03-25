@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
         },
         features = "src/test/resources/features",
         glue = "ourvirtualmarket/step_definitions",
-        dryRun = true,
+        dryRun = false,
         tags = "@successshopping"
 )
 public class CukesRunner {
