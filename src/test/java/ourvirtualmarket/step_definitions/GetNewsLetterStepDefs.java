@@ -46,9 +46,24 @@ public class GetNewsLetterStepDefs {
         loginPage.subscribeTo();
     }
     @Then("The user verifies that message Subscription was successful is displayed")
-    public void the_user_verifies_that_message_subscription_was_successful_is_displayed() throws InterruptedException {
+    public void the_user_verifies_that_message_subscription_was_successful_is_displayed(){
         loginPage.verifySuccessfulSubs();
     }
-
+    @When("The user scrolls down the page to the bottom")
+    public void the_user_scrolls_down_the_page_to_the_bottom() {
+        loginPage.scrollsDownThePageToTheBottom();
+    }
+    @Then("The user verifies a subscription option is present")
+    public void the_user_verifies_a_subscription_option_is_present() {
+        loginPage.verifyBottomSubsIsVisible();
+    }
+    @When("The user enters the email address {string} previously subscribed and clicks subscribe")
+    public void the_user_enters_the_email_address_previously_subscribed_and_clicks_subscribe(String email) {
+        loginPage.subscribeToBottomSubs(email);
+    }
+    @Then("The user verifies that a message saying Email has already exist is displayed")
+    public void the_user_verifies_that_a_message_saying_email_has_already_exist_is_displayed() {
+        loginPage.verifySameEmailMessage();
+    }
 
 }
