@@ -26,8 +26,8 @@ public class SuccessShoppingStepDefs {
     public void the_user_verifies_that_button_at_the_right_bottom_of_the_page() {
         checkoutPage.verifyCheckoutButton();
     }
-    @When("The user clicks on the {string} button")
-    public void the_user_clicks_on_the_button(String string) {
+    @When("The user clicks on the Checkout button")
+    public void the_user_clicks_on_the_checkout_button() {
         checkoutPage.clickCheckoutButton();
     }
     @Then("The user is navigated to the {string} menu")
@@ -58,20 +58,33 @@ public class SuccessShoppingStepDefs {
     public void the_user_verifies_that_a_space_that_allows_the_user_can_add_some_comments_about_the_order() {
         checkoutPage.verifyCommentSpace();
     }
-    @Then("The user verifies that {string} option that is selected as default")
-    public void the_user_verifies_that_option_that_is_selected_as_default(String string) {
+    @When("The user clicks on the Continue button")
+    public void the_user_clicks_on_the_continue_button() {
+        checkoutPage.clickContinueButton();
     }
-    @Then("The user verifies that {string} button")
-    public void the_user_verifies_that_button(String string) {
+    @Then("The user verifies that {string} option that is selected as default")
+    public void the_user_verifies_that_option_that_is_selected_as_default(String Cash_on_Delivery) {
+        checkoutPage.verifyPaymentMethod(Cash_on_Delivery);
+    }
+    @Then("The user verifies that Terms and Conditions button")
+    public void the_user_verifies_that_terms_and_conditions_button() {
+        checkoutPage.verifyTermsAndConditionsButton();
     }
     @When("The user accepts Terms & Conditions and clicks on the Continue button")
     public void the_user_accepts_and_clicks_on_the_button() {
+        checkoutPage.acceptTermsAndConditions();
     }
     @Then("The user verifies that the product names, models, quantities, unit prices, total price for each different product, sub-total, flat shipping rate, total")
     public void the_user_verifies_that_the_product_names_models_quantities_unit_prices_total_price_for_each_different_product_sub_total_flat_shipping_rate_total() {
+        //checkoutPage.verifyOrderDetails();
+    }
+    @When("The user clicks on the Confirm Order button")
+    public void the_user_clicks_on_the_confirm_order_button() {
+        checkoutPage.clickConfirmOrderButton();
     }
     @Then("The user verifies the following messages:")
-    public void the_user_verifies_the_following_messages() {
+    public void the_user_verifies_the_following_messages(List<String> messages) {
+        checkoutPage.verifyOrderMessages(messages);
     }
     @When("The user goes to the home page")
     public void the_user_goes_to_the_home_page() {
@@ -85,5 +98,7 @@ public class SuccessShoppingStepDefs {
     @Then("The user verifies the status and details of shopping")
     public void the_user_verifies_the_status_and_details_of_shopping() {
     }
+
+
 
 }

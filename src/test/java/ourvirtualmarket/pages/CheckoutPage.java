@@ -74,13 +74,23 @@ public class CheckoutPage extends BasePage {
     @FindBy(id = "button-shipping-method")
     private WebElement continueButtonInDeliveryMethod;
 
+    @FindBy(name = "agree")
+    private WebElement agree;
 
+    @FindBy(id = "button-payment-method")
+    private WebElement continueButtonInPaymentMethod;
 
+    @FindBy(xpath = "(//a[.='Noerden Minimi Smart Body Scale'])[2]")
+    private WebElement productName;
 
+    @FindBy(xpath = "//td[.='Noerden Minimi Smart Body Scale']")
+    private WebElement productModel;
 
+    @FindBy(id = "button-confirm")
+    private WebElement confirmButton;
 
-
-
+    @FindBy(id = "content")
+    private WebElement orderMessages;
 
 
 
@@ -197,4 +207,51 @@ public class CheckoutPage extends BasePage {
         Assert.assertTrue(comment.isEnabled());
     }
 
+    /**
+     * This method clicks on the Continue button
+     */
+    public void clickContinueButton() {
+        continueButtonInDeliveryMethod.click();
+    }
+
+    /**
+     * This method verifies the payment method
+     *
+     * @param Cash_on_Delivery
+     */
+    public void verifyPaymentMethod(String Cash_on_Delivery) {
+        WebElement paymentMethodWebElement = Driver.get().findElement(By.xpath("//label[contains(.,'" + Cash_on_Delivery + "')]"));
+        Assert.assertTrue(paymentMethodWebElement.isEnabled());
+    }
+
+    /**
+     * This method verifies the Terms and Conditions button
+     */
+    public void verifyTermsAndConditionsButton() {
+        Assert.assertTrue(agree.isEnabled());
+    }
+
+    /**
+     * This method accepts Terms & Conditions and clicks on the Continue button
+     */
+    public void acceptTermsAndConditions() {
+        agree.click();
+        continueButtonInPaymentMethod.click();
+    }
+
+    public void verifyOrderDetails() {
+        //Assert.assertTrue(Driver.get().findElement(By.xpath("//h1[.='Your Order Has Been Processed!']")).isDisplayed());
+    }
+
+    public void clickConfirmOrderButton() {
+        confirmButton.click();
+    }
+
+    public void verifyOrderMessages(List<String> messages) {
+        System.out.println(messages);
+        for (String message : messages) {
+            Assert.assertTrue(orderMessages.getText().contains(message));
+        }
+
+    }
 }
