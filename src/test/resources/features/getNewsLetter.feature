@@ -33,11 +33,27 @@ Feature: E-mail Subscription Test
     Then The user should verify that the pop-up window disappears
 
   @getNewsLetterSc3
-  Scenario: Empty Email Subscription | Negative Test
+  Scenario: Duplicate Email Subscription | Negative Test
     When The user scrolls down the page to the bottom
     Then The user verifies a subscription option is present
     When The user enters the email address "cumlirefyo@gufum.com" previously subscribed and clicks subscribe
     Then The user verifies that a message saying Email has already exist is displayed
+
+  @getNewsLetterSc4
+  Scenario: Empty Email Subscription | Negative Test
+    When The user scrolls down the page to the bottom
+    Then The user verifies a subscription option is present
+    When The user does not enter data in the email input box and only clicks the subscribe button
+    Then The user verifies that a alert error message saying Email required exist is displayed
+
+
+  @getNewsLetterSc5
+  Scenario: Invalid Email Subscription | Negative Test
+    When The user scrolls down the page to the bottom
+    Then The user verifies a subscription option is present
+    When The user enters the invalid email "cumlirefyogmail.com" in the email input box and clicks the subscribe button
+    Then The user verifies that an error message saying Invalid Email is displayed
+
 
 
 

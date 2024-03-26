@@ -65,5 +65,22 @@ public class GetNewsLetterStepDefs {
     public void the_user_verifies_that_a_message_saying_email_has_already_exist_is_displayed() {
         loginPage.verifySameEmailMessage();
     }
+    @When("The user does not enter data in the email input box and only clicks the subscribe button")
+    public void the_user_does_not_enter_data_in_the_email_input_box_and_only_clicks_the_subscribe_button() {
+        loginPage.clickToBottomSubsWithoutEmail();
+    }
+    @Then("The user verifies that a alert error message saying Email required exist is displayed")
+    public void the_user_verifies_that_a_alert_error_message_saying_email_required_exist_is_displayed() {
+        loginPage.verifyEmptyEmailAlertMessage();
+    }
+    @When("The user enters the invalid email {string} in the email input box and clicks the subscribe button")
+    public void the_user_enters_the_invalid_email_in_the_email_input_box_and_clicks_the_subscribe_button(String invalidEmail) {
+        loginPage.subscribeToBottomSubs(invalidEmail);
+    }
+    @Then("The user verifies that an error message saying Invalid Email is displayed")
+    public void the_user_verifies_that_an_error_message_saying_invalid_email_is_displayed() {
+        loginPage.verifyInvalidEmailMessage();
+    }
+
 
 }
