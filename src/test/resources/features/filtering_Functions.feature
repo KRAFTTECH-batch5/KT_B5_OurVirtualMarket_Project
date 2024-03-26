@@ -1,4 +1,4 @@
-
+@Filtering
 Feature: Searching for products with filtering functionality
 
   Background:
@@ -27,7 +27,27 @@ Feature: Searching for products with filtering functionality
   Scenario: Viewing Total Number of Items under the Manufacturer Tab
     Then The user expects to see the total number of items displayed without any filtering applied as default
 
-  @Filtering
+
   Scenario: Filter products by price range
     When The user sets the price range from minPrice to maxPrice
     Then The user sees the results should only contain products within the specified price range
+
+
+  Scenario: Reset all filters
+    When The user clicks on the Reset All button all settings should return to default values
+    Then The user sees search bar should be empty
+    And The user verifies no filter should be selected
+    And The user verifies the minimum price and the maximum price as ranges
+
+
+  Scenario: Searching with Invalid Product Name
+    When The user searches any product on the search bar as "Telly"
+    Then The user should see an Not product message
+
+
+  Scenario: Verify price changes in filtering section when currency type is changed
+    When the user clicks on the currency button
+    And selects Pound Sterling
+    And The user clicks on any 'Television'
+    When The user searches any product on the search bar as "Hisense"
+    Then the prices under the filtering section should reflect the currency change
