@@ -56,6 +56,9 @@ public class FilteringFuncsPage extends BasePage{
     @FindBy(xpath = "//div[@class='col-xs-12']")
     public WebElement l_notProduct;
 
+    @FindBy(xpath = "//div[@class='col-sm-6 text-right']")
+    public WebElement l_scrollDown;
+
     public void clickOnMainProductOpts() {
         WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(2));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='navbar-header'])[2]")));
@@ -127,18 +130,17 @@ public class FilteringFuncsPage extends BasePage{
 
         String del = Keys.chord(Keys.CONTROL, "a") + Keys.DELETE;
         minPriceInput.sendKeys(del + minPrice);
-        BrowserUtils.waitFor(2);
         maxPriceInput.sendKeys(del + maxPrice + Keys.ENTER);
         BrowserUtils.waitFor(2);
     }
 
     public void getProductPrices() {
-        BrowserUtils.waitFor(3);
+        BrowserUtils.waitForClickablility(Driver.get().findElement(By.cssSelector(".img-responsive:nth-of-type(1)")),3);
         List<String> productPriceList = BrowserUtils.getElementsText(productPrices);
         System.out.println(productPriceList);
         for (String prices : productPriceList) {
             String sub = prices.substring(1,4);
-            if (Integer.parseInt(sub)>150&&Integer.parseInt(sub)<250) {
+            if ((Integer.parseInt(sub)>150)&&(Integer.parseInt(sub)<250)) {
                 Assert.assertTrue(sub,true);
             } else {
                 Assert.fail();
@@ -175,6 +177,16 @@ public class FilteringFuncsPage extends BasePage{
         Assert.assertEquals("Not product",warningMessage);
     }
 
+    public void verifyCurrencyType() {
+        BrowserUtils.waitFor(3);
+        List<String> productPriceList = BrowserUtils.getElementsText(productPrices);
+        System.out.println(productPriceList);
+        for (String prices : productPriceList) {
+            String actualSubSterling = prices.substring(0,1);
+            String expectedSubSterling = "£";
+            Assert.assertEquals(expectedSubSterling,actualSubSterling);
+        }
+    }
 
 
 }

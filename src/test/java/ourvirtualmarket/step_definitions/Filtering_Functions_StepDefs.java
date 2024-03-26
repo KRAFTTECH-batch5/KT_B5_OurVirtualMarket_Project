@@ -112,4 +112,9 @@ public class Filtering_Functions_StepDefs {
         filteringFuncsPage.verifyNotProduct();
     }
 
+    @Then("the prices under the filtering section should reflect the currency change")
+    public void the_prices_under_the_filtering_section_should_reflect_the_currency_change() {
+        filteringFuncsPage.verifyCurrencyType();
+    }
+
 }

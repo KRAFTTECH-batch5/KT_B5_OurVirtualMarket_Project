@@ -1,4 +1,4 @@
-
+@Filtering
 Feature: Searching for products with filtering functionality
 
   Background:
@@ -39,7 +39,15 @@ Feature: Searching for products with filtering functionality
     And The user verifies no filter should be selected
     And The user verifies the minimum price and the maximum price as ranges
 
-  @Filtering
+
   Scenario: Searching with Invalid Product Name
     When The user searches any product on the search bar as "Telly"
     Then The user should see an Not product message
+
+
+  Scenario: Verify price changes in filtering section when currency type is changed
+    When the user clicks on the currency button
+    And selects Pound Sterling
+    And The user clicks on any 'Television'
+    When The user searches any product on the search bar as "Hisense"
+    Then the prices under the filtering section should reflect the currency change
