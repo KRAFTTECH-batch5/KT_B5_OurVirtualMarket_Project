@@ -59,7 +59,7 @@ public class LoginPage extends BasePage {
      * This method verifies the login button on the home page.
      */
     public void verifyLoginButtonHomePage() {
-        loginBtnHomePage.isDisplayed();
+        Assert.assertTrue(loginBtnHomePage.isDisplayed());
     }
 
     /**
@@ -85,14 +85,14 @@ public class LoginPage extends BasePage {
      * This method verifies the email bar.
      */
     public void verifyEmailBar() {
-        emailBar.isDisplayed();
+        Assert.assertTrue(emailBar.isDisplayed());
     }
 
     /**
      * This method verifies the password bar.
      */
     public void verifyPasswordBar() {
-        passwordBar.isDisplayed();
+        Assert.assertTrue(passwordBar.isDisplayed());
     }
 
 
@@ -104,17 +104,17 @@ public class LoginPage extends BasePage {
         String actual = socialAccountBar.getText();
         String expected = string;
         Assert.assertEquals(expected, actual);
-        googleBtn.isDisplayed();
-        facebookBtn.isDisplayed();
-        twitterBtn.isDisplayed();
-        linkedInBtn.isDisplayed();
+        Assert.assertTrue(googleBtn.isDisplayed());
+        Assert.assertTrue(facebookBtn.isDisplayed());
+        Assert.assertTrue(twitterBtn.isDisplayed());
+        Assert.assertTrue(linkedInBtn.isDisplayed());
     }
 
     /**
      * This method verifies the login button.
      */
     public void verifyLoginButton() {
-        loginBtn.isDisplayed();
+        Assert.assertTrue(loginBtn.isDisplayed());
     }
 
     /**
@@ -146,7 +146,7 @@ public class LoginPage extends BasePage {
      * This method verifies the exit button.
      */
     public void verifyExitButton(){
-        exitBtn.isDisplayed();
+        Assert.assertTrue(exitBtn.isDisplayed());
     }
 
     /**
@@ -158,23 +158,37 @@ public class LoginPage extends BasePage {
         Assert.assertEquals(expected, actual);
     }
 
+    /**
+     * This method verifies the unsuccessful login.
+     */
     public void verifyUnsuccessfulLogin() {
         String actual = Driver.get().getCurrentUrl();
         String expected = "https://ourvirtualmarket.com/index.php?route=account/login";
         Assert.assertEquals(expected, actual);
     }
 
+    /**
+     * This method verifies the error message.
+     * @param string
+     */
     public void verifyErrorMessage(String string) {
         String actual = errorMessage.getText();
         String expected = string;
         Assert.assertEquals(expected, actual);
     }
 
+    /**
+     * This method verifies the new customer table.
+
+     */
     public void verifyNewCustomerTable() {
-        newCustomerTable.isDisplayed();
+        Assert.assertTrue(newCustomerTable.isDisplayed());
     }
 
+    /**
+     * This method verifies the returning customer table.
+     */
     public void verifyReturningCustomerTable() {
-        returningCustomerTable.isDisplayed();
+        Assert.assertTrue(returningCustomerTable.isDisplayed());
     }
 }
