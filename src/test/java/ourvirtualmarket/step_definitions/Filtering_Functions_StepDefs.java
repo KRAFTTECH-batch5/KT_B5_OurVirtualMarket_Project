@@ -73,7 +73,7 @@ public class Filtering_Functions_StepDefs {
 
     @Then("The user expects to see the total number of items displayed without any filtering applied as default")
     public void the_user_expects_to_see_the_total_number_of_items_displayed_without_any_filtering_applied_as_default() {
-
+        filteringFuncsPage.verifyPalmNumber();
     }
 
     @When("The user sets the price range from minPrice to maxPrice")
@@ -87,5 +87,34 @@ public class Filtering_Functions_StepDefs {
         filteringFuncsPage.getProductPrices();
     }
 
+    @When("The user clicks on the Reset All button all settings should return to default values")
+    public void the_user_clicks_on_the_Reset_All_button_all_settings_should_return_to_default_values() {
+        filteringFuncsPage.clickResetAllBtn();
+    }
+
+    @Then("The user sees search bar should be empty")
+    public void the_user_sees_search_bar_should_be_empty() {
+        filteringFuncsPage.checkSearchBarIsEmpty();
+    }
+
+    @Then("The user verifies no filter should be selected")
+    public void the_user_verifies_no_filter_should_be_selected() {
+        filteringFuncsPage.palmIsSelected();
+    }
+
+    @Then("The user verifies the minimum price and the maximum price as ranges")
+    public void the_user_verifies_the_minimum_price_and_the_maximum_price_as_ranges() {
+        filteringFuncsPage.verifyMinMaxPrice();
+    }
+
+    @Then("The user should see an Not product message")
+    public void the_user_should_see_an_not_product_message() {
+        filteringFuncsPage.verifyNotProduct();
+    }
+
+    @Then("the prices under the filtering section should reflect the currency change")
+    public void the_prices_under_the_filtering_section_should_reflect_the_currency_change() {
+        filteringFuncsPage.verifyCurrencyType();
+    }
 
 }
