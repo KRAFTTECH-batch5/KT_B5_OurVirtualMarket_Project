@@ -35,21 +35,13 @@ Feature: Success Shopping
     And The user verifies that the product names, models, quantities, unit prices, total price for each different product, sub-total, flat shipping rate, total
     When The user clicks on the Confirm Order button
     Then The user verifies the following messages:
-      | Your order has been placed!                                            |
-      | Your order has been successfully processed!                            |
-      | You can view your order history by going to the |
-      | my account                                                             |
-      |  page and by clicking on |
-      | history                                                                |
-      | .                                                                      |
-      | If your purchase has an associated download, you can go to the account |
-      | downloads                                                              |
-      | page to view them.                                                     |
-      | Please direct any questions you have to the                            |
-      | store owner                                                            |
-      | .                                                                      |
-      | Thanks for shopping with us online!                                    |
+      | Your order has been placed!                                                                         |
+      | Your order has been successfully processed!                                                         |
+      | You can view your order history by going to the my account page and by clicking on history.         |
+      | If your purchase has an associated download, you can go to the account downloads page to view them. |
+      | Please direct any questions you have to the store owner.                                            |
+      | Thanks for shopping with us online!                                                                 |
     When The user goes to the home page
-    Then The user verifies that there is a "Track Your Order" button that allows following the product
+    Then The user verifies that there is a Track Your Order button that allows following the product
     When The user goes to the order history page
     Then The user verifies the status and details of shopping
