@@ -1,4 +1,4 @@
-@Filtering
+@Filter
 Feature: Searching for products with filtering functionality
 
   Background:
