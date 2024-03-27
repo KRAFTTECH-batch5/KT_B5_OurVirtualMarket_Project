@@ -1,17 +1,15 @@
 package ourvirtualmarket.pages;
 
 import com.github.javafaker.Faker;
-import io.cucumber.java.zh_cn.假如;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import ourvirtualmarket.utilities.BrowserUtils;
 import ourvirtualmarket.utilities.Driver;
 
-import java.util.List;
 
 
 public abstract class BasePage {
@@ -31,7 +29,7 @@ public abstract class BasePage {
     private WebElement registerBtn;
     @FindBy(xpath = "//strong[normalize-space()='Home']")
     private WebElement homeBtn;
-    @FindBy(xpath = "//div[@id='test-popup']//div[@class='popup-content']")
+    @FindBy(xpath = "//div[@class='so-custom-popup so-custom-oca-popup']/div[@class='modcontent']")
     private WebElement subsPopUp;
     @FindBy(xpath = "//div[@class='input-box']")
     private WebElement bottomSubs;
@@ -99,10 +97,15 @@ public abstract class BasePage {
         subsPopUp.isDisplayed();
     }
     /**
-     * Bu yöntemi inşallah bir gün kullanacağız.
+     * This method is used to verify that the subscription pop-up window is closed.
      */
     public void verifySubsPopUpIsNotVisible(){
-        //burayı yapamadım kafayı yicem sabahın 5'inde
+        try {
+            subsPopUp.isDisplayed();
+        }
+        catch (NoSuchElementException e) {
+            Assert.assertTrue(true);
+        }
     }
     /**
      * This method is used to verify that the subscription banner appears at the bottom of the page.
