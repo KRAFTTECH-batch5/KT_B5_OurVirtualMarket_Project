@@ -14,22 +14,22 @@ import java.time.Duration;
 import java.util.List;
 
 
-public class FilteringFuncsPage extends BasePage{
+public class FilteringFuncsPage extends BasePage {
 
     WebDriver driver;
 
     Actions actions = new Actions(Driver.get());
 
-    @FindBy (xpath = "//input[@id='text_search']")
+    @FindBy(xpath = "//input[@id='text_search']")
     private WebElement l_SearchBar;
 
-    @FindBy (xpath = "//div[@class='so-filter-option opt-select  opt_enable']/div[@class='so-option-container']")
+    @FindBy(xpath = "//div[@class='so-filter-option opt-select  opt_enable']/div[@class='so-option-container']")
     private WebElement l_ManufacturerTab;
 
-    @FindBy (xpath = ".//div[@class='content_min_max']")
+    @FindBy(xpath = ".//div[@class='content_min_max']")
     private WebElement l_RangeTab;
 
-    @FindBy (xpath = "//button[@class='btn btn-default']")
+    @FindBy(xpath = "//button[@class='btn btn-default']")
     private WebElement l_clickSearchBtn;
 
     @FindBy(className = "img-responsive")
@@ -55,9 +55,6 @@ public class FilteringFuncsPage extends BasePage{
 
     @FindBy(xpath = "//div[@class='col-xs-12']")
     public WebElement l_notProduct;
-
-    @FindBy(xpath = "//div[@class='col-sm-6 text-right']")
-    public WebElement l_scrollDown;
 
     public void clickOnMainProductOpts() {
         WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(2));
@@ -118,10 +115,10 @@ public class FilteringFuncsPage extends BasePage{
         }
     }
 
-    public void verifyPalmNumber(){
+    public void verifyPalmNumber() {
         int expectedPalmNumber = 54;
         int actualPalmNumber = Integer.parseInt(l_palmNumber.getText());
-        Assert.assertEquals(expectedPalmNumber,actualPalmNumber);
+        Assert.assertEquals(expectedPalmNumber, actualPalmNumber);
     }
 
     public void setPriceRange(String minPrice, String maxPrice) {
@@ -135,13 +132,13 @@ public class FilteringFuncsPage extends BasePage{
     }
 
     public void getProductPrices() {
-        BrowserUtils.waitForClickablility(Driver.get().findElement(By.cssSelector(".img-responsive:nth-of-type(1)")),3);
+        BrowserUtils.waitForClickablility(Driver.get().findElement(By.cssSelector(".img-responsive:nth-of-type(1)")), 4);
         List<String> productPriceList = BrowserUtils.getElementsText(productPrices);
         System.out.println(productPriceList);
         for (String prices : productPriceList) {
-            String sub = prices.substring(1,4);
-            if ((Integer.parseInt(sub)>150)&&(Integer.parseInt(sub)<250)) {
-                Assert.assertTrue(sub,true);
+            String sub = prices.substring(1, 4);
+            if ((Integer.parseInt(sub) > 150) & (Integer.parseInt(sub) < 250)) {
+                Assert.assertTrue(sub, true);
             } else {
                 Assert.fail();
             }
@@ -161,32 +158,31 @@ public class FilteringFuncsPage extends BasePage{
         }
     }
 
-    public void palmIsSelected(){
+    public void palmIsSelected() {
         Assert.assertFalse(l_palmCheckBox.isSelected());
     }
 
     public void verifyMinMaxPrice() {
         String valueMin = l_minPrice.getAttribute("value");
         String valueMax = l_maxPrice.getAttribute("value");
-       Assert.assertEquals("103",valueMin);
-       Assert.assertEquals("500",valueMax);
+        Assert.assertEquals("103", valueMin);
+        Assert.assertEquals("500", valueMax);
     }
 
     public void verifyNotProduct() {
         String warningMessage = l_notProduct.getText();
-        Assert.assertEquals("Not product",warningMessage);
+        Assert.assertEquals("Not product", warningMessage);
     }
 
     public void verifyCurrencyType() {
-        BrowserUtils.waitFor(3);
+        BrowserUtils.waitFor(4);
         List<String> productPriceList = BrowserUtils.getElementsText(productPrices);
         System.out.println(productPriceList);
         for (String prices : productPriceList) {
-            String actualSubSterling = prices.substring(0,1);
+            String actualSubSterling = prices.substring(0, 1);
             String expectedSubSterling = "£";
-            Assert.assertEquals(expectedSubSterling,actualSubSterling);
+            Assert.assertEquals(expectedSubSterling, actualSubSterling);
         }
     }
-
 
 }
