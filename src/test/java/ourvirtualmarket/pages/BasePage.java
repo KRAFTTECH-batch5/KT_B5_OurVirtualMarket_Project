@@ -3,6 +3,7 @@ package ourvirtualmarket.pages;
 import com.github.javafaker.Faker;
 import io.cucumber.java.zh_cn.假如;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +21,7 @@ public abstract class BasePage {
 
     Faker faker = new Faker();
     JavascriptExecutor js;
+    Alert alert;
 
     @FindBy(xpath = "//button[@class='popup-close']")
     private WebElement subsPopupClose;
@@ -198,6 +200,31 @@ public abstract class BasePage {
         String expected = verifytoprice.getText();
         String actual = "£";
         Assert.assertTrue(expected.contains(actual));
+    }
+    /**
+     * This method is used to click the subscribe button without entering an email in the subscription banner below.
+     */
+    public void clickToBottomSubsWithoutEmail(){
+        subBtnBottom.click();
+    }
+    /**
+     * This method is used to verify the alert error message that appears when the subscribe button is clicked
+     * without entering an e-mail in the subscription header below.
+     */
+    public void verifyEmptyEmailAlertMessage(){
+        alert = Driver.get().switchTo().alert();
+        String expectedMessage = "Email is required";
+        String actualMessage = alert.getText();
+        Assert.assertEquals(expectedMessage,actualMessage);
+    }
+    /**
+     * This method is used to validate the warning error message displayed when an invalid email is entered
+     * in the subscription header below and the subscribe button is clicked.
+     */
+    public void verifyInvalidEmailMessage(){
+        String expectedMessage = " × Invalid Email ";
+        String actualMessage = subsAlertMessage.getAttribute("textContent");
+        Assert.assertEquals(expectedMessage,actualMessage);
     }
 
 }
