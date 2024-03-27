@@ -9,8 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import ourvirtualmarket.utilities.BrowserUtils;
 import ourvirtualmarket.utilities.Driver;
-
-
 public abstract class BasePage {
     public BasePage() {
         PageFactory.initElements(Driver.get(), this);

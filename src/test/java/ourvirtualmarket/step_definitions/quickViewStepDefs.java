@@ -30,7 +30,6 @@ public class quickViewStepDefs {
         loginPage.navigateToHomePage();
         loginPage.quickViewAndAddToCard();
     }
-
     @When("adds the product to the cart and the cart total should be updated correctly in the pop-up")
     public void adds_the_product_to_the_cart() {
         loginPage.addToCardbtnClick();

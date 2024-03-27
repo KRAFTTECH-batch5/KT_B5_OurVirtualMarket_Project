@@ -1,6 +1,5 @@
 @mhmmdincs
 Feature: Quick View and Updating Cart Charge
-
   Scenario: User adds a product to the cart and sees the updated charge
     Given the user must be logged in and on the home page with at least one product in their cart
     When the user hovers over a product and clicks quick view
