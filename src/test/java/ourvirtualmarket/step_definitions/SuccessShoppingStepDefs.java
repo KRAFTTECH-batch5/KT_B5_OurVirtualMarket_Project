@@ -76,7 +76,7 @@ public class SuccessShoppingStepDefs {
     }
     @Then("The user verifies that the product names, models, quantities, unit prices, total price for each different product, sub-total, flat shipping rate, total")
     public void the_user_verifies_that_the_product_names_models_quantities_unit_prices_total_price_for_each_different_product_sub_total_flat_shipping_rate_total() {
-        //checkoutPage.verifyOrderDetails();
+        checkoutPage.verifyOrderDetails();
     }
     @When("The user clicks on the Confirm Order button")
     public void the_user_clicks_on_the_confirm_order_button() {
@@ -88,15 +88,19 @@ public class SuccessShoppingStepDefs {
     }
     @When("The user goes to the home page")
     public void the_user_goes_to_the_home_page() {
+        checkoutPage.navigateToHomePage();
     }
-    @Then("The user verifies that there is a {string} button that allows following the product")
-    public void the_user_verifies_that_there_is_a_button_that_allows_following_the_product(String string) {
+    @Then("The user verifies that there is a Track Your Order button that allows following the product")
+    public void the_user_verifies_that_there_is_a_button_that_allows_following_the_product() {
+        checkoutPage.verifyFollowProductButton();
     }
     @When("The user goes to the order history page")
     public void the_user_goes_to_the_order_history_page() {
+        checkoutPage.navigateToOrderHistory();
     }
     @Then("The user verifies the status and details of shopping")
     public void the_user_verifies_the_status_and_details_of_shopping() {
+        checkoutPage.verifyOrderHistory();
     }
 
 
