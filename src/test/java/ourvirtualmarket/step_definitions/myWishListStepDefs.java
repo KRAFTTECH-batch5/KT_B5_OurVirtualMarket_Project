@@ -27,12 +27,12 @@ public class myWishListStepDefs {
 
     @Then("The user sees a success message at the top of the page confirming that the item has been added to the wishlist and clicks on the Heart Icon in the upper right corner of the page.")
     public void the_user_sees_a_success_message_at_the_top_of_the_page_confirming_that_the_item_has_been_added_to_the_wishlist() {
-        loginPage.popUpSuccefly();
+        loginPage.redirectToHeartIcon();
     }
 
     @Then("The user is redirected to the My Wishlist page and sees the products that have already been added to the wish list.")
     public void the_user_is_redirected_to_the_page() {
-        loginPage.orientationToPage();
+        loginPage.displayPreviousList();
 
     }
 

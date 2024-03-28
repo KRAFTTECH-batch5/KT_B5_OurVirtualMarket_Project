@@ -52,9 +52,9 @@ public abstract class BasePage {
     @FindBy(xpath = "(//button[@class='wishlist btn-button'])[4]")
     private WebElement wishListremigthbtn;
     @FindBy(xpath = "//div[@class='alert alert-success fadeOut']/a[.='Remington NE3150 Smart']")
-    private WebElement popUpSuccesFuly;
+    private WebElement popUpSuccesfully;
     @FindBy(xpath = "//*[@id=\"wishlist-total\"]")
-    private WebElement wishListBtn;
+    private WebElement wishListBtnClick;
     @FindBy(xpath = "//*[@id=\"content\"]/div[1]/table/tbody/tr/td[2]/a")
     private WebElement wishListNotEmpty;
 
@@ -128,8 +128,10 @@ public abstract class BasePage {
         emailBoxToSubs.sendKeys(faker.internet().emailAddress());
         subsBtn.click();
     }
+
     /**
      * This method retrieves the visibility wish lists.
+     *
      * @return The visibility wish lists
      */
 
@@ -148,18 +150,20 @@ public abstract class BasePage {
         BrowserUtils.waitFor(2);
         wishListremigthbtn.click();
     }
+
     /**
      * This method navigates to the page and verifies if the wish list is not empty.
      */
-    public void popUpSuccefly() {
-        String abs = popUpSuccesFuly.getText();
-        System.out.println("abs = " + abs);
+    public void redirectToHeartIcon() {
+        String productVisibility = popUpSuccesfully.getText();
+        System.out.println("product = " + productVisibility);
     }
+
     /**
      * This method is used to subscribe via the pop-up.
      */
-    public void orientationToPage() {
-        wishListBtn.click();
+    public void displayPreviousList() {
+        wishListBtnClick.click();
         wishListNotEmpty.isDisplayed();
 
     }
