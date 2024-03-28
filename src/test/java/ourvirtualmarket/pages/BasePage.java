@@ -17,7 +17,6 @@ import ourvirtualmarket.utilities.Driver;
 import java.util.List;
 
 
-
 public abstract class BasePage {
     public BasePage() {
         PageFactory.initElements(Driver.get(), this);
@@ -60,7 +59,7 @@ public abstract class BasePage {
     private WebElement addToCardBTNdisplayed;
     @FindBy(xpath = "//*[@id=\"cart\"]/a/div/div/span/span[3]")
     private WebElement totalPayments;
-    
+
     @FindBy(xpath = "//input[@id='txtemail']")
     private WebElement emailInputBoxBottomSubs;
     @FindBy(xpath = "//button[normalize-space()='Subscribe']")
@@ -87,8 +86,6 @@ public abstract class BasePage {
     public WebElement returnsLink;
 
 
-
-
     /**
      * This method closes the "popup" on the main page.
      */
@@ -111,30 +108,32 @@ public abstract class BasePage {
     /**
      * This method is used to go to the home page.
      */
-    public void navigateToHomePage(){
+    public void navigateToHomePage() {
         homeBtn.click();
     }
+
     /**
      * This method is used to verify that the subscription pop-up has been opened.
      */
-    public void verifySubsPopUpIsVisible(){
+    public void verifySubsPopUpIsVisible() {
         subsPopUp.isDisplayed();
     }
+
     /**
      * This method is used to verify that the subscription pop-up window is closed.
      */
-    public void verifySubsPopUpIsNotVisible(){
+    public void verifySubsPopUpIsNotVisible() {
         try {
             subsPopUp.isDisplayed();
-        }
-        catch (NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             Assert.assertTrue(true);
         }
     }
+
     /**
      * This method is used to verify that the subscription banner appears at the bottom of the page.
      */
-    public void verifyBottomSubsIsVisible(){
+    public void verifyBottomSubsIsVisible() {
         bottomSubs.isDisplayed();
     }
 
@@ -173,13 +172,14 @@ public abstract class BasePage {
         emailBoxToSubs.sendKeys(faker.internet().emailAddress());
         subsBtn.click();
     }
-    
+
     /**
      * This method returns the visibility control WebElement.
      */
     public WebElement getVisibilityControl() {
         return visibilityControl;
     }
+
     /**
      * Performs product control.
      */
@@ -189,6 +189,7 @@ public abstract class BasePage {
         int expectedCount = 1;
         Assert.assertTrue(actualCount >= expectedCount);
     }
+
     /**
      * Opens quick view and clicks on Add to Cart.
      */
@@ -202,6 +203,7 @@ public abstract class BasePage {
         BrowserUtils.waitFor(3);
         Assert.assertNotNull(element);
     }
+
     /**
      * Clicks on the Add to Cart button.
      */
@@ -216,41 +218,46 @@ public abstract class BasePage {
         BrowserUtils.waitFor(5);
         Driver.get().navigate().refresh();
     }
+
     /**
      * Verifies that Total Payments is displayed.
      */
     public void totalPayments() {
         Assert.assertTrue(totalPayments.isDisplayed());
+    }
 
     /**
      * This method is used to verify the valid subscription message.
      */
-    public void verifySuccessfulSubs(){
+    public void verifySuccessfulSubs() {
         String expectedMessage = " × Subcription was successfull";
         String actualMessage = subsAlertMessage.getAttribute("textContent");
-        Assert.assertEquals(expectedMessage,actualMessage);
+        Assert.assertEquals(expectedMessage, actualMessage);
     }
+
     /**
      * This method is used to scroll the page to the bottom.
      */
-    public void scrollsDownThePageToTheBottom(){
+    public void scrollsDownThePageToTheBottom() {
         js = (JavascriptExecutor) Driver.get();
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
     }
+
     /**
      * This method is used to subscribe via the subscription at the bottom of the page.
      */
-    public void subscribeToBottomSubs(String email){
+    public void subscribeToBottomSubs(String email) {
         emailInputBoxBottomSubs.sendKeys(email);
         subBtnBottom.click();
     }
+
     /**
      * This method is used to verify the incoming message when trying to subscribe with the same e-mail.
      */
-    public void verifySameEmailMessage(){
+    public void verifySameEmailMessage() {
         String expectedMessage = " × Email has already exist";
         String actualMessage = subsAlertMessage.getAttribute("textContent");
-        Assert.assertEquals(expectedMessage,actualMessage);
+        Assert.assertEquals(expectedMessage, actualMessage);
     }
 
     public void verifytoDollar() {
@@ -259,11 +266,12 @@ public abstract class BasePage {
         Assert.assertTrue(expected.contains(actual));
     }
 
-    public void clickcurrencybtn(){
+    public void clickcurrencybtn() {
         currencyswitchingBtn.click();
 
     }
-    public void clicktoeurobtn(){
+
+    public void clicktoeurobtn() {
         EuroBtn.click();
         homeBtn.click();
     }
@@ -274,7 +282,7 @@ public abstract class BasePage {
         Assert.assertTrue(expected.contains(actual));
     }
 
-    public void clicktopoundSterlinbtn(){
+    public void clicktopoundSterlinbtn() {
         PoundSterlingBtn.click();
         homeBtn.click();
     }
@@ -284,31 +292,35 @@ public abstract class BasePage {
         String actual = "£";
         Assert.assertTrue(expected.contains(actual));
     }
+
     /**
      * This method is used to click the subscribe button without entering an email in the subscription banner below.
      */
-    public void clickToBottomSubsWithoutEmail(){
+    public void clickToBottomSubsWithoutEmail() {
         subBtnBottom.click();
     }
+
     /**
      * This method is used to verify the alert error message that appears when the subscribe button is clicked
      * without entering an e-mail in the subscription header below.
      */
-    public void verifyEmptyEmailAlertMessage(){
+    public void verifyEmptyEmailAlertMessage() {
         alert = Driver.get().switchTo().alert();
         String expectedMessage = "Email is required";
         String actualMessage = alert.getText();
-        Assert.assertEquals(expectedMessage,actualMessage);
+        Assert.assertEquals(expectedMessage, actualMessage);
     }
+
     /**
      * This method is used to validate the warning error message displayed when an invalid email is entered
      * in the subscription header below and the subscribe button is clicked.
      */
-    public void verifyInvalidEmailMessage(){
+    public void verifyInvalidEmailMessage() {
         String expectedMessage = " × Invalid Email ";
         String actualMessage = subsAlertMessage.getAttribute("textContent");
-        Assert.assertEquals(expectedMessage,actualMessage);
+        Assert.assertEquals(expectedMessage, actualMessage);
 
     }
 
 }
+
