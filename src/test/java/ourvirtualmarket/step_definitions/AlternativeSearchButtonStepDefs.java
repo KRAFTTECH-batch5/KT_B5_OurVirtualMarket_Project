@@ -2,14 +2,11 @@ package ourvirtualmarket.step_definitions;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
-import org.openqa.selenium.WebElement;
 import ourvirtualmarket.pages.AlternativeSearchPage;
 import ourvirtualmarket.pages.SearchPage;
-import ourvirtualmarket.utilities.BrowserUtils;
 
 
-public class alternativeSearchButtonStepDefs {
+public class AlternativeSearchButtonStepDefs {
     AlternativeSearchPage alternativeSearchPage = new AlternativeSearchPage();
     SearchPage searchPage = new SearchPage();
 

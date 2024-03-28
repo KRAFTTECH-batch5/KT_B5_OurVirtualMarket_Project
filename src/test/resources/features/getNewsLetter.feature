@@ -16,7 +16,7 @@ Feature: E-mail Subscription Test
     * The user enters the e-mail and password information and clicks the LOGIN button
     * The user should be able to log in
 
-
+  @getNewsLetterSc1
   Scenario: Cancel Subscription Popup | Positive Test
     When The user clicks to HOME button
     Then The user should verify a pop-up message offering to subscribe to the mailing list
@@ -24,11 +24,36 @@ Feature: E-mail Subscription Test
     Then The user should verify that the pop-up window disappears
     Then The user should be able to continue subscribing using the banner at the bottom
 
-  @emre
+  @getNewsLetterSc2
   Scenario: Valid Subscription | Positive Test
     When The user clicks to HOME button
     Then The user should verify a pop-up message offering to subscribe to the mailing list
     When The user enters a valid email address in the subscription form and clicks Subscribe button
     Then The user verifies that message Subscription was successful is displayed
     Then The user should verify that the pop-up window disappears
+
+  @getNewsLetterSc3
+  Scenario: Duplicate Email Subscription | Negative Test
+    When The user scrolls down the page to the bottom
+    Then The user verifies a subscription option is present
+    When The user enters the email address "cumlirefyo@gufum.com" previously subscribed and clicks subscribe
+    Then The user verifies that a message saying Email has already exist is displayed
+
+  @getNewsLetterSc4
+  Scenario: Empty Email Subscription | Negative Test
+    When The user scrolls down the page to the bottom
+    Then The user verifies a subscription option is present
+    When The user does not enter data in the email input box and only clicks the subscribe button
+    Then The user verifies that a alert error message saying Email required exist is displayed
+
+
+  @getNewsLetterSc5
+  Scenario: Invalid Email Subscription | Negative Test
+    When The user scrolls down the page to the bottom
+    Then The user verifies a subscription option is present
+    When The user enters the invalid email "cumlirefyogmail.com" in the email input box and clicks the subscribe button
+    Then The user verifies that an error message saying Invalid Email is displayed
+
+
+
 
