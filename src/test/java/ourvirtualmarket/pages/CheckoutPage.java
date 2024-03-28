@@ -113,6 +113,9 @@ public class CheckoutPage extends BasePage {
     @FindBy(css = "tr:nth-of-type(5) > td:nth-of-type(2)")
     private WebElement totalPriceWithFlatShippingRate;
 
+    @FindBy(xpath = "//a[text() ='Continue']")
+    public WebElement continueButtonInSuccessShop;
+
 
     /**
      * This method adds a product to the cart

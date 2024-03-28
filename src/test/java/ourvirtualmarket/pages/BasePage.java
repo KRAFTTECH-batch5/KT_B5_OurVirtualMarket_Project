@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import ourvirtualmarket.utilities.Driver;
 
+import java.util.List;
 
 
 public abstract class BasePage {
@@ -62,7 +63,11 @@ public abstract class BasePage {
 
     @FindBy(xpath = "//span[@class='items_carts']")
     private WebElement verifytoprice;
+    @FindBy(xpath = "//a[contains(text(),'Returns')]")
+    public List<WebElement> returnLinks;
 
+    @FindBy(xpath = "//a[@href=\"index.php?route=account/return/add\"]")
+    public WebElement returnsLink;
 
 
 
