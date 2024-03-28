@@ -52,6 +52,8 @@ public class LoginPage extends BasePage {
 
     @FindBy(xpath = "//div[@class='well col-sm-12']")
     private WebElement returningCustomerTable;
+    @FindBy(xpath = "//span[@class='items_cart']")
+    private WebElement addToCard;
 
 
     /**
