@@ -56,7 +56,6 @@ public class LoginPage extends BasePage {
     private WebElement addToCard;
 
 
-
     /**
      * This method verifies the login button on the home page.
      */
@@ -100,6 +99,7 @@ public class LoginPage extends BasePage {
 
     /**
      * This method verifies the social accounts.
+     *
      * @param string
      */
     public void verifySocialMediaButtons(String string) {
@@ -121,6 +121,7 @@ public class LoginPage extends BasePage {
 
     /**
      * This method verifies the social account button.
+     *
      * @param string
      */
     public void verifyCreateAnAccountButton(String string) {
@@ -131,14 +132,14 @@ public class LoginPage extends BasePage {
 
     /**
      * This method logs in with valid credentials.
-
      */
     public void login() {
         emailBar.sendKeys(ConfigurationReader.get("username1"));
         passwordBar.sendKeys(ConfigurationReader.get("password1"));
         loginBtn.click();
     }
-    public void login(String email,String password){
+
+    public void login(String email, String password) {
         emailBar.sendKeys(email);
         passwordBar.sendKeys(password);
         loginBtn.click();
@@ -147,7 +148,7 @@ public class LoginPage extends BasePage {
     /**
      * This method verifies the exit button.
      */
-    public void verifyExitButton(){
+    public void verifyExitButton() {
         Assert.assertTrue(exitBtn.isDisplayed());
     }
 
@@ -171,6 +172,7 @@ public class LoginPage extends BasePage {
 
     /**
      * This method verifies the error message.
+     *
      * @param string
      */
     public void verifyErrorMessage(String string) {
@@ -181,7 +183,6 @@ public class LoginPage extends BasePage {
 
     /**
      * This method verifies the new customer table.
-
      */
     public void verifyNewCustomerTable() {
         Assert.assertTrue(newCustomerTable.isDisplayed());
@@ -192,5 +193,8 @@ public class LoginPage extends BasePage {
      */
     public void verifyReturningCustomerTable() {
         Assert.assertTrue(returningCustomerTable.isDisplayed());
+    }
+
+    public void verifyBottomSubsIsVisible() {
     }
 }

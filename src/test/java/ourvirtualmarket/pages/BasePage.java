@@ -7,10 +7,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import ourvirtualmarket.utilities.BrowserUtils;
+
 import ourvirtualmarket.utilities.Driver;
 
 
@@ -86,6 +90,17 @@ public abstract class BasePage {
     public WebElement returnsLink;
 
 
+    @FindBy(xpath = "//*[text()='Remington NE3150 Smart']")
+    private WebElement visibilityWishList1;
+    @FindBy(xpath = "(//button[@class='wishlist btn-button'])[4]")
+    private WebElement wishListremigthbtn;
+    @FindBy(xpath = "//div[@class='alert alert-success fadeOut']/a[.='Remington NE3150 Smart']")
+    private WebElement popUpSuccesfully;
+    @FindBy(xpath = "//*[@id=\"wishlist-total\"]")
+    private WebElement wishListBtnClick;
+    @FindBy(xpath = "//*[@id=\"content\"]/div[1]/table/tbody/tr/td[2]/a")
+    private WebElement wishListNotEmpty;
+
     /**
      * This method closes the "popup" on the main page.
      */
@@ -97,7 +112,7 @@ public abstract class BasePage {
     /**
      * This method closes the "popup" on the main page without ticking the box.
      */
-    public void closePopUpWithoutCheckbox() {
+    public void closePopUpWithoutCheckbox(){
         subsPopupClose.click();
     }
 
@@ -143,6 +158,10 @@ public abstract class BasePage {
     public void isSearchBtnDisplay() {
         Assert.assertTrue(searchBtn.isDisplayed());
     }
+
+
+
+
 
     /**
      * This method verifies that the search bar is displayed.
@@ -268,9 +287,7 @@ public abstract class BasePage {
 
     public void clickcurrencybtn() {
         currencyswitchingBtn.click();
-
     }
-
     public void clicktoeurobtn() {
         EuroBtn.click();
         homeBtn.click();
@@ -322,5 +339,35 @@ public abstract class BasePage {
 
     }
 
+    /**
+     * This method retrieves the success pop-up and prints it.
+     */
+    public void hoverAndClickWishList () {
+        BrowserUtils.waitFor(2);
+        BrowserUtils.hover(visibilityWishList1);
+        BrowserUtils.waitFor(2);
+        wishListremigthbtn.click();
+    }
+
+    /**
+     * This method navigates to the page and verifies if the wish list is not empty.
+     */
+    public void redirectToHeartIcon () {
+        String productVisibility = popUpSuccesfully.getText();
+        System.out.println("product = " + productVisibility);
+    }
+
+    /**
+     * This method is used to subscribe via the pop-up.
+     */
+    public void displayPreviousList () {
+        wishListBtnClick.click();
+        wishListNotEmpty.isDisplayed();
+
+    }
+
 }
+
+
+
 
