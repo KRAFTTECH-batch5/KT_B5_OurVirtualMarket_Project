@@ -1,16 +1,21 @@
 package ourvirtualmarket.pages;
 
 import com.github.javafaker.Faker;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import ourvirtualmarket.utilities.BrowserUtils;
 import ourvirtualmarket.utilities.Driver;
 
+
 import java.util.List;
+
 
 
 public abstract class BasePage {
@@ -19,8 +24,10 @@ public abstract class BasePage {
     }
 
     Faker faker = new Faker();
+
     JavascriptExecutor js;
     Alert alert;
+
 
     @FindBy(xpath = "//button[@class='popup-close']")
     private WebElement subsPopupClose;
@@ -44,6 +51,16 @@ public abstract class BasePage {
     private WebElement subsBtn;
     @FindBy(xpath = "//div[@role='alert']")
     private WebElement subsAlertMessage;
+
+    @FindBy(xpath = "//span[@class='items_cart']")
+    private WebElement addToCard;
+    @FindBy(xpath = "//*[text()='Remington NE3150 Smart']")
+    private WebElement visibilityControl;
+    @FindBy(xpath = "//*[text()='Remington NE3150 Smart']")
+    private WebElement addToCardBTNdisplayed;
+    @FindBy(xpath = "//*[@id=\"cart\"]/a/div/div/span/span[3]")
+    private WebElement totalPayments;
+    
     @FindBy(xpath = "//input[@id='txtemail']")
     private WebElement emailInputBoxBottomSubs;
     @FindBy(xpath = "//button[normalize-space()='Subscribe']")
@@ -71,6 +88,7 @@ public abstract class BasePage {
 
 
 
+
     /**
      * This method closes the "popup" on the main page.
      */
@@ -82,13 +100,14 @@ public abstract class BasePage {
     /**
      * This method closes the "popup" on the main page without ticking the box.
      */
-    public void closePopUpWithoutCheckbox(){
+    public void closePopUpWithoutCheckbox() {
         subsPopupClose.click();
     }
 
     public void navigateToRegisterPage() {
         registerBtn.click();
     }
+
     /**
      * This method is used to go to the home page.
      */
@@ -118,35 +137,91 @@ public abstract class BasePage {
     public void verifyBottomSubsIsVisible(){
         bottomSubs.isDisplayed();
     }
+
     /**
      * This method verifies that the search button is displayed.
      */
-    public void isSearchBtnDisplay(){Assert.assertTrue(searchBtn.isDisplayed());}
+    public void isSearchBtnDisplay() {
+        Assert.assertTrue(searchBtn.isDisplayed());
+    }
 
     /**
      * This method verifies that the search bar is displayed.
      */
-    public void isSearchBarDisplay(){Assert.assertTrue(searchBar.isDisplayed());}
+    public void isSearchBarDisplay() {
+        Assert.assertTrue(searchBar.isDisplayed());
+    }
 
     /**
      * This method verifies that the search bar default text.
      */
-    public void verifySearchBarDefaultText(String defaultText){
-        String expectedDefaultText= searchBar.getAttribute("placeholder");
-        String actualDefaultText= defaultText;
-        Assert.assertEquals(expectedDefaultText,actualDefaultText);
+    public void verifySearchBarDefaultText(String defaultText) {
+        String expectedDefaultText = searchBar.getAttribute("placeholder");
+        String actualDefaultText = defaultText;
+        Assert.assertEquals(expectedDefaultText, actualDefaultText);
     }
-    public void searchMethod(String SearchData){
-       searchBar.sendKeys(SearchData);
-       searchBtn.click();
+
+    public void searchMethod(String SearchData) {
+        searchBar.sendKeys(SearchData);
+        searchBtn.click();
     }
+
     /**
      * This method is used to subscribe via the pop-up.
      */
-    public void subscribeTo(){
+    public void subscribeTo() {
         emailBoxToSubs.sendKeys(faker.internet().emailAddress());
         subsBtn.click();
     }
+    
+    /**
+     * This method returns the visibility control WebElement.
+     */
+    public WebElement getVisibilityControl() {
+        return visibilityControl;
+    }
+    /**
+     * Performs product control.
+     */
+    public void productControl() {
+        String actual = addToCard.getText();
+        int actualCount = Integer.parseInt(actual);
+        int expectedCount = 1;
+        Assert.assertTrue(actualCount >= expectedCount);
+    }
+    /**
+     * Opens quick view and clicks on Add to Cart.
+     */
+    public void quickViewAndAddToCard() {
+        navigateToHomePage();
+        BrowserUtils.scrollToElement(getVisibilityControl());
+        BrowserUtils.waitFor(3);
+        BrowserUtils.hover(getVisibilityControl());
+        BrowserUtils.waitFor(3);
+        WebElement element = Driver.get().findElement(By.xpath("(//button[@class='addToCart btn-button'])[4]")); // XPath ifadesini düzelttik
+        BrowserUtils.waitFor(3);
+        Assert.assertNotNull(element);
+    }
+    /**
+     * Clicks on the Add to Cart button.
+     */
+    public void addToCardbtnClick() {
+        navigateToHomePage();
+        BrowserUtils.scrollToElement(getVisibilityControl());
+        BrowserUtils.waitFor(3);
+        BrowserUtils.hover(getVisibilityControl());
+        BrowserUtils.waitFor(3);
+        WebElement element = Driver.get().findElement(By.xpath("(//button[@class='addToCart btn-button'])[4]"));
+        element.click();
+        BrowserUtils.waitFor(5);
+        Driver.get().navigate().refresh();
+    }
+    /**
+     * Verifies that Total Payments is displayed.
+     */
+    public void totalPayments() {
+        Assert.assertTrue(totalPayments.isDisplayed());
+
     /**
      * This method is used to verify the valid subscription message.
      */
@@ -233,6 +308,7 @@ public abstract class BasePage {
         String expectedMessage = " × Invalid Email ";
         String actualMessage = subsAlertMessage.getAttribute("textContent");
         Assert.assertEquals(expectedMessage,actualMessage);
+
     }
 
 }
