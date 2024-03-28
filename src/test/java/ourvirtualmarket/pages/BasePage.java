@@ -15,7 +15,6 @@ public abstract class BasePage {
     }
 
     Faker faker = new Faker();
-
     @FindBy(xpath = "//button[@class='popup-close']")
     private WebElement subsPopupClose;
     @FindBy(xpath = "//input[@name='hidden-popup']")
