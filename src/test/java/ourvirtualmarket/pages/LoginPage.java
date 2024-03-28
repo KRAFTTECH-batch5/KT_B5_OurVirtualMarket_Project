@@ -132,8 +132,8 @@ public class LoginPage extends BasePage {
 
      */
     public void login() {
-        emailBar.sendKeys(ConfigurationReader.get("username"));
-        passwordBar.sendKeys(ConfigurationReader.get("password"));
+        emailBar.sendKeys(ConfigurationReader.get("username1"));
+        passwordBar.sendKeys(ConfigurationReader.get("password1"));
         loginBtn.click();
     }
     public void login(String email,String password){
