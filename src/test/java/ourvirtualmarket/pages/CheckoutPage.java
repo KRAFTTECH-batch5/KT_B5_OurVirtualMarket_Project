@@ -13,11 +13,11 @@ import java.util.List;
 public class CheckoutPage extends BasePage {
 
     public String flatShippingRate;
-    public List<String> productQuantities = new ArrayList<>();
-    public List<String> productUnitPrices = new ArrayList<>();
-    public List<String> productTotalPrices = new ArrayList<>();
-    public List<String> productModels = new ArrayList<>();
-    public List<String> productNames = new ArrayList<>();
+    public List<String> productQuantities ;
+    public List<String> productUnitPrices ;
+    public List<String> productTotalPrices ;
+    public List<String> productModels ;
+    public List<String> productNames ;
     public String totalPrice;
 
     @FindBy(className = "img-responsive")
