@@ -23,7 +23,6 @@ public class Filtering_Functions_StepDefs {
     @Given("The user lands on the main product options")
     public void the_user_lands_on_the_main_product_options() {
         filteringFuncsPage.clickOnMainProductOpts();
-
     }
 
     @Given("The user clicks on any {string}")
@@ -79,7 +78,6 @@ public class Filtering_Functions_StepDefs {
     @When("The user sets the price range from minPrice to maxPrice")
     public void the_user_sets_the_price_range_from_to() {
         filteringFuncsPage.setPriceRange(minPrice, maxPrice);
-
     }
 
     @Then("The user sees the results should only contain products within the specified price range")
@@ -116,5 +114,4 @@ public class Filtering_Functions_StepDefs {
     public void the_prices_under_the_filtering_section_should_reflect_the_currency_change() {
         filteringFuncsPage.verifyCurrencyType();
     }
-
 }
