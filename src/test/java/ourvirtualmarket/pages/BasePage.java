@@ -411,7 +411,7 @@ public abstract class BasePage {
         wait.until(ExpectedConditions.visibilityOf(l_myAccountText));
         String actualResult=l_myAccountText.getText();
         //Beklenen değer My account'ın görüntülenememesi , fakat görebildiğimiz için BUG diyorum
-        //assertNotEquals ile kontrol ettim.
+        //assertNotEquals ile kontrol ettim. assertion true çıktığı için hata mesajı alıyorum (BUG)
         Assert.assertNotEquals(expectedResult,actualResult);
         BrowserUtils.waitFor(1);
     }
