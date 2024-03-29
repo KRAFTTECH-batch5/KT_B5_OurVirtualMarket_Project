@@ -13,11 +13,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ourvirtualmarket.utilities.BrowserUtils;
 
 import ourvirtualmarket.utilities.Driver;
 
 
+import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,6 +29,8 @@ public abstract class BasePage {
     public BasePage() {
         PageFactory.initElements(Driver.get(), this);
     }
+
+    WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(5));
 
     Faker faker = new Faker();
 
@@ -100,6 +106,14 @@ public abstract class BasePage {
     private WebElement wishListBtnClick;
     @FindBy(xpath = "//*[@id=\"content\"]/div[1]/table/tbody/tr/td[2]/a")
     private WebElement wishListNotEmpty;
+
+    @FindBy(xpath = "//a[@class='link-lg']")
+    private WebElement l_logoutButton;
+    @FindBy(xpath = "//div[@class='col-sm-9']")
+    private List<WebElement> l_logoutPageMessages;
+    @FindBy(xpath = "//*[@id='content']/h2[1]")
+    private WebElement l_myAccountText;
+
 
     /**
      * This method closes the "popup" on the main page.
@@ -365,6 +379,44 @@ public abstract class BasePage {
         wishListNotEmpty.isDisplayed();
 
     }
+
+    public void verifyLogoutButtonIsDisplayed(){
+        wait.until(ExpectedConditions.visibilityOf(l_logoutButton));
+        String expectedResult="Logout";
+        String actualResult=l_logoutButton.getText();
+        Assert.assertEquals(expectedResult,actualResult);
+    }
+
+    public void clickToLogoutButton(){
+        wait.until(ExpectedConditions.visibilityOf(l_logoutButton));
+        l_logoutButton.click();
+    }
+
+    public void verifyLogoutPageMessagesAfterLogout(List<String> list){
+        List<String> logoutPageMessages = BrowserUtils.getElementsText(Driver.get().findElements(By.xpath(
+                "//div[@class='col-sm-9']")));
+        System.out.println("logoutPageMessages.get(0) = " + logoutPageMessages.get(0));
+        for (int i = 0; i < list.size(); i++) {
+            Assert.assertTrue(logoutPageMessages.get(0).contains(list.get(i)));
+        }
+    }
+
+    /**
+     * Burada normalde çıkış yaptıktan sonra geri geldiğinde
+     * My account sayfasına geri gelememesi lazım ama geri geldiği zaman
+     * My Account sayfasını görebiliyor <BUG> olarak düşündüm bu kısmı
+     */
+    public void verifyThatUserCantComeBackHisPersonalPage(){
+        String expectedResult="My Account";
+        wait.until(ExpectedConditions.visibilityOf(l_myAccountText));
+        String actualResult=l_myAccountText.getText();
+        //Beklenen değer My account'ın görüntülenememesi , fakat görebildiğimiz için BUG diyorum
+        //assertNotEquals ile kontrol ettim.
+        Assert.assertNotEquals(expectedResult,actualResult);
+        BrowserUtils.waitFor(1);
+    }
+
+
 
 }
 
