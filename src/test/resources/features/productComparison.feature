@@ -39,7 +39,7 @@ Feature: Product Comparison
       | Dimensions (L x W x H) |
 
 
-  @sonson
+  @deneme
   Scenario Outline: The user should be able to verify comparing more than 4 items together is not allowed
     When The user adds third product to Comparison list
     When The user adds fourth product to Comparison list
